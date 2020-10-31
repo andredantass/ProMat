@@ -6,7 +6,7 @@ var txh1;
 function startInitial()
 {
 
-	if (urlData === '/index') {
+	if (urlData === '/question') {
 		var h1	= document.querySelector('.copy h1'),
 		h2		= document.querySelector('.copy h2'),
 		txh1	= 'Você pode ganhar até  R$ 4.500,00.';

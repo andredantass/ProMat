@@ -16,7 +16,6 @@ export class FormsComponent implements OnInit,  AfterViewChecked, AfterViewInit 
     this.router.navigate(['/qualification']);
   }
   ngOnInit() {
-
     startInitial();
   }
   ngAfterViewInit() {
