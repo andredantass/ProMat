@@ -30,7 +30,25 @@ namespace ProMat.WebAPI
             services.AddDbContext<DataContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+
+                options.AddPolicy("AllowAllDEV", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200/")
+                   .AllowAnyHeader()
+                   .WithMethods("GET", "POST")
+                   .AllowCredentials();
+                });
+
+                //    //options.AddPolicy("AllowAllDEV", builder =>
+                //    // {
+                //    //     builder.WithOrigins("https://directhealthmanagement.azurewebsites.net")
+                //    //       .AllowAnyHeader()
+                //    //       .WithMethods("GET", "POST")
+                //    //        .AllowCredentials();
+                //    // });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
