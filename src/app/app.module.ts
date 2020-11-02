@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,7 @@ import { QualificationFormComponent } from './qualification-form/qualification-f
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { QualificationFormNobornComponent } from './qualification-form-noborn/qualification-form-noborn.component';
 import { QualificationFormBornComponent } from './qualification-form-born/qualification-form-born.component';
-
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,13 @@ import { QualificationFormBornComponent } from './qualification-form-born/qualif
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [FormService],
   exports: [],
   bootstrap: [AppComponent]
 })

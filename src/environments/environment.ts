@@ -1,16 +1,19 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
+  timeoutSessionIdle: 900,
+  apiURL: 'http://localhost:5000/api',
+  appInsights: {
+      instrumentationKey: '1ffaed42-6265-458a-ae0d-ffd0600ac948'
+  },
+  SSO_BASE_URL: 'https://ssohmo.blueopex.com',
+  auth: {
+      ROOT_URL: "https://localhost:5000/app/auth",
+      AUTH_URL: 'https://ssohmo.blueopex.com/',
+      AUTH_CLINTID: 'bolight.azurewebsites.net',
+      REQUERID_SCOPE: 'openid profile offline_access',
+      LOGOUT_URL: 'https://ssohmo.blueopex.com/Account/logout',
+
+      RESPONSE_TYPE: 'token id_token',
+      REQUEST_CLAIMS: ['company']
+  }, 
   production: false
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
