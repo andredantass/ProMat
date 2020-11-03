@@ -108,9 +108,8 @@
   }
   
   button {
-    outline: none;
-    background: none;
-    border: none;
+
+    box-shadow: inset;
   }
   
   /* ==========================================================================
@@ -189,6 +188,7 @@
   
   .wrapper--w680 {
     max-width: 680px;
+    margin-right: -20px;
   }
   
   /* ==========================================================================
@@ -231,7 +231,7 @@
   }
   
   input[type="date" i] {
-    padding: 14px;
+    padding: 4px;
   }
   
   .table-condensed td, .table-condensed th {
@@ -1460,7 +1460,13 @@ a.crm-webform-bottom-link:focus {
         min-width: 420px
     }
 }
-
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    border-color: #ccc;
+    -ms-transition: border-color 0.3s;
+    -moz-transition: border-color 0.3s;
+    -webkit-transition: border-color 0.3s;
+}
 @media(min-width:260px) and (max-width:479px) {
     .crm-webform-popup-content {
         min-width: 245px
