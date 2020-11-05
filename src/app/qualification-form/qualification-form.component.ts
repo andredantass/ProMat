@@ -112,7 +112,7 @@ export class QualificationFormComponent implements OnInit {
     this.qualifiedForm.DateBorn = this.registerForm.get('dateBorn').value;
     this.qualifiedForm.DateJobEnd = this.registerForm.get('dateJobEnd').value;
 
-    this.formService.validateForm(this.qualifiedForm).subscribe(
+    this.formService.validateBornForm(this.qualifiedForm).subscribe(
       response => {
         //Swal.fire('Success', 'Password was changed successfully.', 'success');
 

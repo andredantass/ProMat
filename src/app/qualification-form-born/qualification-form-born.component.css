@@ -156,6 +156,10 @@
   {
     border-radius: 2px;
   }
+  .img-fluid
+  {
+      max-width: 680px;
+  }
   /* ==========================================================================
      #BACKGROUND
      ========================================================================== */
@@ -188,9 +192,25 @@
   
   .wrapper--w680 {
     max-width: 680px;
-    margin-right: -20px;
+
   }
-  
+
+  .img-fluid
+  {
+      max-width: 680px;
+      src: url(../../assets/img/BannerLuxLight.png) no-repeat
+  }
+  @media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    [class*="wrapper--w680"] {
+        margin-right: -20px;
+    }
+    [class*="img-fluid"] {
+
+        height: 195px;
+        src: url(../../assets/img/BannerLuxLightMobile.png) no-repeat
+    }
+  }
   /* ==========================================================================
      #BUTTON
      ========================================================================== */

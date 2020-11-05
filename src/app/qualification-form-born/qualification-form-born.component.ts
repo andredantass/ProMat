@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '../services/form.service';
 import { QualifiedQueue } from '../qualification-form/model/qualifiedqueue';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-qualification-form-born',
@@ -109,17 +110,26 @@ export class QualificationFormBornComponent implements OnInit {
     this.qualifiedForm.Phone = this.registerForm.get('phone').value;
     this.qualifiedForm.Situation = this.registerForm.get('situation').value;
     this.qualifiedForm.PrevSituation = this.registerForm.get('prevSituation').value;
-    this.qualifiedForm.DateBorn = this.registerForm.get('dateBorn').value;
-    this.qualifiedForm.DateJobEnd = this.registerForm.get('dateJobEnd').value;
 
-    this.formService.validateForm(this.qualifiedForm).subscribe(
+    if (this.registerForm.get('dateBorn').value != '')
+    {
+      this.qualifiedForm.DateBorn = this.registerForm.get('dateBorn').value;
+    }
+    this.qualifiedForm.SegJobReceive = this.registerForm.get('segJobReceive').value;
+    if (this.registerForm.get('dateJobEnd').value != '')
+    {
+      this.qualifiedForm.DateJobEnd = this.registerForm.get('dateJobEnd').value;
+    }
+
+
+    this.formService.validateBornForm(this.qualifiedForm).subscribe(
       response => {
-        //Swal.fire('Success', 'Password was changed successfully.', 'success');
+        Swal.fire('Success', 'PARABÉNS PELA SUA DECISÃO. <br> AGRADECEMOS A CONFIANÇA EM NOSSOS SERVIÇOS E MUITO EM BREVE RETORNAREMOS COM O RESULTADO DA ANÁLISE DIRETAMENTE EM SEU WHATSAPP!', 'success');
 
       },
       error => {
         console.log(error);
-        //Swal.fire('Error to change Password', error, 'error');
+        Swal.fire('ERRO AO ENVIAR O FORMULÁRIO!', error, 'error');
       }
     );
 

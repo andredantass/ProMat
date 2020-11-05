@@ -13,14 +13,16 @@ export class FormService {
 constructor(private http: HttpClient) {
 }
 
-validateForm(registerForm: QualifiedQueue) {
-  alert('passou');
-  return this.http.post<QualifiedQueue>(`${this.api}/Form/ValidateForm`, registerForm);
+validateBornForm(registerForm: QualifiedQueue) {
+  return this.http.post<QualifiedQueue>(`${this.api}/Form/ValidateFormBorn`, registerForm);
 }
+validateNoBornForm(registerForm: QualifiedQueue)
+{
+  return this.http.post<QualifiedQueue>(`${this.api}/Form/ValidateFormNoBorn`, registerForm);
+}
+
 getTeste()
 {
-  alert(`${this.api}/Form/Authenticated`);
-
   this.http.get(`${this.api}/Form/Authenticated`).subscribe(response => {
     this.return = response;
   }, error => {
