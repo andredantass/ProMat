@@ -8,9 +8,11 @@ namespace ProMat.WebAPI.Model
         public string FirstName { get; set; }
         public string Phone { get; set; }
         public string Situation { get; set; }
-        public DateTime DateBorn { get; set; }
+        public DateTime? DateBorn { get; set; } = new DateTime();
         public string PrevSituation { get; set; }
-        public DateTime DateJobEnd { get; set; }
+        public DateTime? DateJobEnd { get; set; } = new DateTime();
+        public string SegJobReceive { get; set; }
+        
 
     }
 }

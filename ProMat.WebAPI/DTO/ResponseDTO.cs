@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProMat.WebAPI.Model
+namespace ProMat.WebAPI.DTO
 {
     public class ResponseDTO
     {

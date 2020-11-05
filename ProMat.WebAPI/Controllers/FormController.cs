@@ -13,6 +13,8 @@ using Google.Apis.Auth.OAuth2;
 using System.IO;
 using Google.Apis.Services;
 using ProMat.WebAPI.Model;
+using ProMat.WebAPI.DTO;
+using ProMat.WebAPI.Service;
 
 namespace ProMat.WebAPI.Controllers
 {
@@ -29,11 +31,62 @@ namespace ProMat.WebAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("ValidateForm")]
-        public ResponseDTO ValidateForm([FromBody] QualifiedQueue model)
+        [Route("ValidateFormBorn")]
+        public ResponseDTO ValidateFormBorn([FromBody] QualifiedQueue model)
         {
+            FormServices formAnswerService = new FormServices();
             var response = new ResponseDTO();
-            response.Data = new { sucesso = 1, message = "Formulario validado com sucesso!" };
+
+            try
+            {
+                var ret = formAnswerService.CheckQualifieBornQuestionForm(model);
+
+                if (ret)
+                {
+                    response.Data = new { sucesso = 1, message = "Formulario validado com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível validar o formulário!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        /// <summary>
+        /// Criar ou Atualizar um processo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("ValidateFormNoBorn")]
+        public ResponseDTO ValidateFormNoBorn([FromBody] QualifiedQueue model)
+        {
+            FormServices formAnswerService = new FormServices();
+            var response = new ResponseDTO();
+
+            try
+            {
+                var ret = formAnswerService.CheckQualifieNoBornQuestionForm(model);
+
+                if (ret)
+                {
+                    response.Data = new { sucesso = 1, message = "Formulario validado com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível validar o formulário!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
             return response;
         }
         [HttpGet]

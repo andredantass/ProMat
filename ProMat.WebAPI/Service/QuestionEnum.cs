@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProMat.WebAPI.Model
+namespace ProMat.WebAPI.Service
 {
     public enum YouAre
     {
@@ -17,11 +17,14 @@ namespace ProMat.WebAPI.Model
         [Description("Mãe de filho(a) MENOR de 5 anos.")]
         MotherChildLessFiveYears,
         [Description("Mãe de filho(a) com MAIS de 5 anos.")]
-        MotherChildMoreFiveYears
+        MotherChildMoreFiveYears,
+        Empty
 
     }
     public enum HasYouWorked
     {
+        [Description("TRABALHEI REGISTRADA.")]
+        WasFired,
         [Description("TRABALHEI REGISTRADA antes de nascer.")]
         WorkRegisteredBeforeBorn,
         [Description("Sou MEI (Micro Empreendedor Individual).")]
@@ -31,7 +34,8 @@ namespace ProMat.WebAPI.Model
         [Description("NÃO trabalhei registrada antes de nascer.")]
         NoWorkedRegisteredBeforeBorn,
         [Description("Nunca trabalhei registrada.")]
-        NeverWorked
+        NeverWorked,
+        Empty
 
     }
     public enum ReceivedWorkInsurances
@@ -39,9 +43,8 @@ namespace ProMat.WebAPI.Model
         [Description("SIM, RECEBI seguro desemprego.")]
         Yes,
         [Description("NÃO recebi seguro desemprego.")]
-        No
+        No,
+        Empty
     }
-    public class QuestionEnum
-    {
-    }
+
 }
