@@ -31,7 +31,7 @@ function startInitial()
 					}
 				var prox1 = char1.pop();
 				h1.innerHTML += prox1;
-			}, 50);
+			}, 10);
 		
 	} else if(urlData === '/parabens.html') {
 		var h1	= document.querySelector('.copy h1'),

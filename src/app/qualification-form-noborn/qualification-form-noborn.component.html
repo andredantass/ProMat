@@ -182,15 +182,16 @@
                                                                 formControlName="prevSituation" id="ddlYouWorked"
                                                                 (change)="ddlHasYouWorkedSelectedChangeHandler($event)">
                                                                 <option value="">Não selecionado</option>
-                                                                <option value="WorkRegisteredBeforeBorn">TRABALHO
-                                                                    REGISTRADA.</option>
-                                                                <option value="WasFired">TRABALHEI REGISTRADA.</option>
+                                                              <!--   <option value="WorkRegisteredBeforeBorn">TRABALHO
+                                                                    REGISTRADA.</option> -->
+                                                                <option value="WasFired">TRABALHEI
+                                                                    REGISTRADA antes de nascer.</option>
                                                                 <option value="ImMEI">Sou MEI (Micro Empreendedor
                                                                     Individual).</option>
                                                                 <option value="PayedFormByMyOn">Pago a previdência por
                                                                     conta (carnê GPS).</option>
                                                                 <option value="NoWorkedRegisteredBeforeBorn">NÃO
-                                                                    trabalho registrada</option>
+                                                                    trabalhei registrada antes de nascer.</option>
                                                                 <option value="NeverWorked">Nunca trabalhei registrada.
                                                                 </option>
                                                             </select> <b *ngIf="f.prevSituation.errors?.required"

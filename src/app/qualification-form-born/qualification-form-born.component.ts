@@ -125,11 +125,12 @@ export class QualificationFormBornComponent implements OnInit {
     this.formService.validateBornForm(this.qualifiedForm).subscribe(
       response => {
         Swal.fire('Success', 'PARABÉNS PELA SUA DECISÃO. <br> AGRADECEMOS A CONFIANÇA EM NOSSOS SERVIÇOS E MUITO EM BREVE RETORNAREMOS COM O RESULTADO DA ANÁLISE DIRETAMENTE EM SEU WHATSAPP!', 'success');
-
+        this.onReset();
       },
       error => {
         console.log(error);
         Swal.fire('ERRO AO ENVIAR O FORMULÁRIO!', error, 'error');
+        this.onReset();
       }
     );
 
@@ -140,6 +141,8 @@ export class QualificationFormBornComponent implements OnInit {
   }
 
   onReset() {
+    this.workRegistered = false;
+    this.WorkRegisteredBeforeBorn = false;
     this.submitted = false;
     this.registerForm.reset();
   }
