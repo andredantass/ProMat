@@ -5,5 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>ProMat.WebAPI</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>ProMatAPI - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

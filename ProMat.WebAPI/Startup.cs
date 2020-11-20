@@ -27,8 +27,8 @@ namespace ProMat.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(
-                x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<DataContext>(
+            //    x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddCors(options =>
             {
@@ -41,13 +41,13 @@ namespace ProMat.WebAPI
                    .AllowCredentials();
                 });
 
-                //    //options.AddPolicy("AllowAllDEV", builder =>
-                //    // {
-                //    //     builder.WithOrigins("https://directhealthmanagement.azurewebsites.net")
-                //    //       .AllowAnyHeader()
-                //    //       .WithMethods("GET", "POST")
-                //    //        .AllowCredentials();
-                //    // });
+                //options.AddPolicy("AllowAllDEV", builder =>
+                // {
+                //     builder.WithOrigins("https://promat-application.herokuapp.com/")
+                //       .AllowAnyHeader()
+                //       .WithMethods("GET", "POST")
+                //        .AllowCredentials();
+                // });
             });
         }
 

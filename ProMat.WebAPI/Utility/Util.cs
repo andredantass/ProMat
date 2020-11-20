@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -9,6 +10,24 @@ namespace ProMat.WebAPI.Utility
 {
     public static class Util
     {
+        public static void StoreLastCompany(string currentCompanyUser, string path)
+        {
+            using (StreamWriter file = new StreamWriter(path))
+            {
+                file.Write(currentCompanyUser);
+            }
+        }
+        public static string ReadLastCompany(string url)
+        {
+           
+            FileStream fileStream = new FileStream(url, FileMode.Open);
+            string line = "";
+            using (StreamReader reader = new StreamReader(fileStream))
+            {
+                line = reader.ReadLine();
+            }
+            return line;
+        }
         public static string GetDescription<T>(this T enumerationValue) where T : struct
         {
             Type type = enumerationValue.GetType();

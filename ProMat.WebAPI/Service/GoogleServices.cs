@@ -8,21 +8,29 @@ using System.IO;
 using Google.Apis.Services;
 using ProMat.WebAPI.Model;
 using Google.Apis.Sheets.v4.Data;
+using ProMat.WebAPI.Utility;
 
 namespace ProMat.WebAPI.Service
 {
     public class GoogleServices
     {
+        private static readonly GoogleServices _mySingletonGoogleServiceInstance = new GoogleServices();
+
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
         static readonly string ApplicationName = "Current Legislators";
         static readonly string SpreadsheetIdCompany1 = "1Uhi0xsPvAVp44usDCFcVqXHQcd7ZE6PY-psFNuFP7fE";
         static readonly string SpreadsheetIdCompany2 = "1gEVGe_mP-YT7kfAmhQMrS1tPn6nK0zN6QXbwMh06SvI";
         static readonly string QualifiedSheet = "QualifiedQueue";
         static readonly string DisqualifiedSheet = "DisqualifiedQueue";
+
+        private static int currentCompany;
+
         static SheetsService service;
         private const string ReadRange = "Sheet1!A:C";
 
-        public void ReadGoogleSheets()
+
+        public static GoogleServices GetInstance() => _mySingletonGoogleServiceInstance;
+        public GoogleServices()
         {
             GoogleCredential credential;
             using (var stream = new FileStream("google-credentials.json", FileMode.Open, FileAccess.Read))
@@ -37,57 +45,118 @@ namespace ProMat.WebAPI.Service
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
-            InsertQualifiedEntryCompany1();
+        
+
         }
-        static void InsertQualifiedEntryCompany1()
+
+        public void InsertLeadEntryToGoogleDocs(QualifiedLead qualifiedUser, bool isQualified)
+        {
+            //string lastCompany = Util.ReadLastCompany();
+            string lastCompany = "";
+            if (lastCompany == "1")
+            {
+                if (isQualified)
+                    InsertQualifiedEntryCompany2(qualifiedUser);
+                else
+                    InsertDisqualifiedEntryCompany2(qualifiedUser);
+            }
+            else
+            {
+                if (isQualified)
+                    InsertQualifiedEntryCompany1(qualifiedUser);
+                else
+                    InsertDisqualifiedEntryCompany1(qualifiedUser);
+            }
+        }
+        private void InsertQualifiedEntryCompany1(QualifiedLead qualifiedUser)
         {
             var range = $"{QualifiedSheet}!A:G";
             var valueRange = new ValueRange();
 
-            var objectList = new List<object>() { "Regiane", "11967656565", "Gestante", "30/12/2020", "Não", "12/02/2019","Sim" };
+            var objectList = new List<object>() { qualifiedUser.FirstName,
+                                                  qualifiedUser.Phone,
+                                                  qualifiedUser.Situation,
+                                                  Convert.ToDateTime(qualifiedUser.DateBorn).ToShortDateString(),
+                                                  qualifiedUser.PrevSituation,
+                                                  Convert.ToDateTime(qualifiedUser.DateJobEnd).ToShortDateString(),
+                                                  qualifiedUser.SegJobReceive };
+
             valueRange.Values = new List<IList<object>> { objectList };
 
             var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetIdCompany1, range);
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
             var appendResponse = appendRequest.Execute();
+            
+            //Util.StoreLastCompany("1");
+            
         }
-        static void InsertDisqualifiedEntryCompany1()
+        private void InsertDisqualifiedEntryCompany1(QualifiedLead qualifiedUser)
         {
             var range = $"{DisqualifiedSheet}!A:G";
             var valueRange = new ValueRange();
 
-            var objectList = new List<object>() { "Regiane", "11967656565", "Gestante", "30/12/2020", "Não", "12/02/2019", "Sim" };
+            var objectList = new List<object>() { qualifiedUser.FirstName,
+                                                  qualifiedUser.Phone,
+                                                  qualifiedUser.Situation,
+                                                  Convert.ToDateTime(qualifiedUser.DateBorn).ToShortDateString(),
+                                                  qualifiedUser.PrevSituation,
+                                                  Convert.ToDateTime(qualifiedUser.DateJobEnd).ToShortDateString(),
+                                                  qualifiedUser.SegJobReceive };
+
+
             valueRange.Values = new List<IList<object>> { objectList };
 
             var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetIdCompany1, range);
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
             var appendResponse = appendRequest.Execute();
+
+            //Util.StoreLastCompany("1");
         }
-        static void InsertQualifiedEntryCompany2()
+        private void InsertQualifiedEntryCompany2(QualifiedLead qualifiedUser)
         {
             var range = $"{QualifiedSheet}!A:G";
             var valueRange = new ValueRange();
 
-            var objectList = new List<object>() { "Regiane", "11967656565", "Gestante", "30/12/2020", "Não", "12/02/2019", "Sim" };
+            var objectList = new List<object>() { qualifiedUser.FirstName,
+                                                  qualifiedUser.Phone,
+                                                  qualifiedUser.Situation,
+                                                  Convert.ToDateTime(qualifiedUser.DateBorn).ToShortDateString(),
+                                                  qualifiedUser.PrevSituation,
+                                                  Convert.ToDateTime(qualifiedUser.DateJobEnd).ToShortDateString(),
+                                                  qualifiedUser.SegJobReceive };
+
+
             valueRange.Values = new List<IList<object>> { objectList };
 
             var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetIdCompany2, range);
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
             var appendResponse = appendRequest.Execute();
+
+            //Util.StoreLastCompany("2");
         }
-        static void InsertDisqualifiedEntryCompany2()
+        private void InsertDisqualifiedEntryCompany2(QualifiedLead qualifiedUser)
         {
             var range = $"{DisqualifiedSheet}!A:G";
             var valueRange = new ValueRange();
 
-            var objectList = new List<object>() { "Regiane", "11967656565", "Gestante", "30/12/2020", "Não", "12/02/2019", "Sim" };
+            var objectList = new List<object>() { qualifiedUser.FirstName,
+                                                  qualifiedUser.Phone,
+                                                  qualifiedUser.Situation,
+                                                  Convert.ToDateTime(qualifiedUser.DateBorn).ToShortDateString(),
+                                                  qualifiedUser.PrevSituation,
+                                                  Convert.ToDateTime(qualifiedUser.DateJobEnd).ToShortDateString(),
+                                                  qualifiedUser.SegJobReceive };
+
+
             valueRange.Values = new List<IList<object>> { objectList };
 
             var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetIdCompany2, range);
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
             var appendResponse = appendRequest.Execute();
+
+            //Util.StoreLastCompany("2");
         }
-        static void ReadDisqualifiedEntriesCompany1()
+        private void ReadDisqualifiedEntriesCompany1()
         {
             var range = $"DisqualifiedQueue!A:G";
 
@@ -98,7 +167,7 @@ namespace ProMat.WebAPI.Service
             Console.WriteLine(values);
         }
 
-        static void ReadQualifiedEntriesCompany1()
+        public void ReadQualifiedEntriesCompany1()
         {
             var range = $"QualifiedQueue!A:G";
 
@@ -135,7 +204,7 @@ namespace ProMat.WebAPI.Service
              } */
         }
 
-        static void ReadDisqualifiedEntriesCompany2()
+        public void ReadDisqualifiedEntriesCompany2()
         {
             var range = $"DisqualifiedQueue!A:G";
 
@@ -146,7 +215,7 @@ namespace ProMat.WebAPI.Service
             Console.WriteLine(values);
         }
 
-        static void ReadQualifiedEntriesCompany2()
+        public void ReadQualifiedEntriesCompany2()
         {
             var range = $"QualifiedQueue!A:G";
 

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProMat.WebAPI", "ProMat.WebAPI\ProMat.WebAPI.csproj", "{B4634B11-50C7-4213-A708-3F4DD28AB4FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProMat.WebAPI", "ProMat.WebAPI\ProMat.WebAPI.csproj", "{B4634B11-50C7-4213-A708-3F4DD28AB4FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProMatExecuteTest", "ProMatExecuteTest\ProMatExecuteTest.csproj", "{FE30B903-4DE3-418A-936D-07AB8D62A73F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B4634B11-50C7-4213-A708-3F4DD28AB4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +29,23 @@ Global
 		{B4634B11-50C7-4213-A708-3F4DD28AB4FD}.Release|x64.Build.0 = Release|Any CPU
 		{B4634B11-50C7-4213-A708-3F4DD28AB4FD}.Release|x86.ActiveCfg = Release|Any CPU
 		{B4634B11-50C7-4213-A708-3F4DD28AB4FD}.Release|x86.Build.0 = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|x64.Build.0 = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE30B903-4DE3-418A-936D-07AB8D62A73F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59BFCBF6-5716-4E0A-8B28-37A03F27CA67}
 	EndGlobalSection
 EndGlobal

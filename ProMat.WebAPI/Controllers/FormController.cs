@@ -32,14 +32,27 @@ namespace ProMat.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("ValidateFormBorn")]
-        public ResponseDTO ValidateFormBorn([FromBody] QualifiedQueue model)
+        public ResponseDTO ValidateFormBorn([FromBody] QualifiedLead model)
         {
             FormServices formAnswerService = new FormServices();
             var response = new ResponseDTO();
 
             try
             {
-                var ret = formAnswerService.CheckQualifieBornQuestionForm(model);
+                var retQualified = formAnswerService.CheckQualifieBornQuestionForm(model);
+                YouAre youAreObj = (YouAre)Enum.Parse(typeof(YouAre), model.Situation);
+
+                if (retQualified)
+                {
+                    if (youAreObj == YouAre.MotherChildLessFiveYears)
+                        formAnswerService.InsertQualifiedLeadtoBitrixQueue(model, retQualified, "135");
+                }
+                else
+                {
+                    formAnswerService.InsertDisQualifiedLeadtoBitrixQueue(model, retQualified, "NOQUALIFIED");
+                }
+
+                var ret = formAnswerService.InsertLeadToGoogleDoc(model, retQualified);
 
                 if (ret)
                 {
@@ -64,14 +77,29 @@ namespace ProMat.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("ValidateFormNoBorn")]
-        public ResponseDTO ValidateFormNoBorn([FromBody] QualifiedQueue model)
+        public ResponseDTO ValidateFormNoBorn([FromBody] QualifiedLead model)
         {
             FormServices formAnswerService = new FormServices();
             var response = new ResponseDTO();
 
             try
             {
-                var ret = formAnswerService.CheckQualifieNoBornQuestionForm(model);
+                var retQualified = formAnswerService.CheckQualifieNoBornQuestionForm(model);
+                YouAre youAreObj = (YouAre)Enum.Parse(typeof(YouAre), model.Situation);
+
+                if (retQualified)
+                {
+                    if (youAreObj == YouAre.PregnantChildLessFiveYears)
+                        formAnswerService.InsertQualifiedLeadtoBitrixQueue(model, retQualified, "PLUSS");
+                    else if (youAreObj == YouAre.PregnantFirstChild || youAreObj == YouAre.PregnantChildMoreFiveYears)
+                        formAnswerService.InsertQualifiedLeadtoBitrixQueue(model, retQualified, "DPP");
+                }
+                else
+                {
+                    formAnswerService.InsertDisQualifiedLeadtoBitrixQueue(model, retQualified, "NOQUALIFIED");
+                }
+
+                var ret = formAnswerService.InsertLeadToGoogleDoc(model, retQualified);
 
                 if (ret)
                 {
@@ -97,8 +125,8 @@ namespace ProMat.WebAPI.Controllers
         [Route("ReadData")]
         public void ReadData()
         {
-            Service.GoogleServices googleService = new Service.GoogleServices();
-            googleService.ReadGoogleSheets();
+            //Service.GoogleServices googleService = new Service.GoogleServices();
+            //googleService.ReadGoogleSheets();
         }
       
        

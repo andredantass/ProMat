@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ProMat.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ProMat.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.49.0.2098" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
@@ -16,6 +26,15 @@
    
   </ItemGroup>
   <ItemGroup>
+   <None Update="Data\DataControl\UnQualified.txt">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Data\DataControl\Qualifield.txt">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Data\DataControl\Control.txt">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
    <None Update="google-credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
