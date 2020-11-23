@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +11,9 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { QualificationFormNobornComponent } from './qualification-form-noborn/qualification-form-noborn.component';
 import { QualificationFormBornComponent } from './qualification-form-born/qualification-form-born.component';
 import { FormService } from './services/form.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { FormService } from './services/form.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

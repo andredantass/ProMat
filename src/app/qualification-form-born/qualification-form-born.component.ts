@@ -16,6 +16,8 @@ export class QualificationFormBornComponent implements OnInit {
   workRegistered: boolean = false;
   WorkRegisteredBeforeBorn: boolean = false;
   setDefault: boolean = false;
+  IsWait: boolean = true;
+
 
   constructor(private formBuilder: FormBuilder, private formService: FormService) { }
 
@@ -105,7 +107,7 @@ export class QualificationFormBornComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
+    this.IsWait = false;
     this.qualifiedForm.FirstName = this.registerForm.get('firstName').value;
     this.qualifiedForm.Phone = this.registerForm.get('phone').value;
     this.qualifiedForm.Situation = this.registerForm.get('situation').value;
@@ -124,14 +126,17 @@ export class QualificationFormBornComponent implements OnInit {
 
     this.formService.validateBornForm(this.qualifiedForm).subscribe(
       response => {
-        Swal.fire('Success', 'PARABÉNS PELA SUA DECISÃO. <br> AGRADECEMOS A CONFIANÇA EM NOSSOS SERVIÇOS E MUITO EM BREVE RETORNAREMOS COM O RESULTADO DA ANÁLISE DIRETAMENTE EM SEU WHATSAPP!', 'success');
+        Swal.fire('Formulário Enviado!', 'PARABÉNS PELA SUA DECISÃO. <br> AGRADECEMOS A CONFIANÇA EM NOSSOS SERVIÇOS E MUITO EM BREVE RETORNAREMOS COM O RESULTADO DA ANÁLISE DIRETAMENTE EM SEU WHATSAPP!', 'success');
+        this.IsWait = true;
         this.onReset();
       },
       error => {
         console.log(error);
         Swal.fire('ERRO AO ENVIAR O FORMULÁRIO!', error, 'error');
+        this.IsWait = true;
         this.onReset();
       }
+
     );
 
 

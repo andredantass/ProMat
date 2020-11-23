@@ -198,7 +198,7 @@
   .img-fluid
   {
       max-width: 680px;
-      src: url(../../assets/img/BannerLuxLight.png) no-repeat
+      src: url(../../assets/img/bannercentralmaternidade.png) no-repeat
   }
   @media only screen and (max-width: 600px) {
     /* For mobile phones: */
@@ -208,7 +208,7 @@
     [class*="img-fluid"] {
 
         height: 195px;
-        src: url(../../assets/img/BannerLuxLightMobile.png) no-repeat
+        src: url(../../assets/img/bannercentralmaternidademobile.png) no-repeat
     }
   }
   /* ==========================================================================
@@ -228,7 +228,23 @@
     font-size: 14px;
     font-weight: 700;
   }
-  
+  .overlay{
+    height:100vh;
+    width:100%;
+    background-color:rgba(0, 0, 0, 0.286);
+    z-index:    10;
+    top:        0; 
+    left:       0; 
+    position:   fixed;
+  }
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
   .btn--radius {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;

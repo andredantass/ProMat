@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const path = require('path');
 const app = express();
 
@@ -12,4 +12,4 @@ app.get('/*', (req,res) => {
 
 app.listen(PORT, () => {
     console.log('Servidor iniciado na porta ' + PORT);
-}) 
+})  */
