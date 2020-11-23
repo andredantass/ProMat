@@ -41,18 +41,19 @@ namespace ProMat.WebAPI.Controllers
             {
                 var retQualified = formAnswerService.CheckQualifieBornQuestionForm(model);
                 YouAre youAreObj = (YouAre)Enum.Parse(typeof(YouAre), model.Situation);
+                bool ret = false;
 
                 if (retQualified)
                 {
                     if (youAreObj == YouAre.MotherChildLessFiveYears)
-                        formAnswerService.InsertQualifiedLeadtoBitrixQueue(model, retQualified, "135");
+                        ret = formAnswerService.InsertQualifiedLeadtoBitrixQueue(model, retQualified, "135");
                 }
                 else
                 {
-                    formAnswerService.InsertDisQualifiedLeadtoBitrixQueue(model, retQualified, "NOQUALIFIED");
+                    ret = formAnswerService.InsertDisQualifiedLeadtoBitrixQueue(model, retQualified, "NOQUALIFIED");
                 }
 
-                var ret = formAnswerService.InsertLeadToGoogleDoc(model, retQualified);
+                //var ret = formAnswerService.InsertLeadToGoogleDoc(model, retQualified);
 
                 if (ret)
                 {

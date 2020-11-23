@@ -25,14 +25,32 @@ namespace ProMat.WebAPI.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-       
-
         [HttpGet]
         [Route("UpdateDepartmentStructure")]
-        public void UpdateDepartmentStructure()
+        public ResponseDTO UpdateDepartmentStructure()
         {
-            //Service.GoogleServices googleService = new Service.GoogleServices();
-            //googleService.ReadGoogleSheets();
+            DepartmentServices departmentService = new DepartmentServices();
+            var response = new ResponseDTO();
+
+            try
+            {
+                var ret = departmentService.SincronizeDepartmentWithBitrix();
+               
+                if (ret == 1)
+                {
+                    response.Data = new { sucesso = 1, message = "Departamentos atualizados com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível atualizar os departamentos!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
       
        

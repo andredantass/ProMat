@@ -42,9 +42,9 @@ namespace ProMat.WebAPI.Repository
         {
             return _context.Webhook.ToList();
         }
-        public List<Webhook> GetByID(int departmentID)
+        public List<Webhook> GetByID(int webHookId)
         {
-            var result = _context.Webhook.Where(x => x.DepartmentId == departmentID);
+            var result = _context.Webhook.Where(x => x.WebhookID == webHookId);
             return result.ToList();
         }
     }

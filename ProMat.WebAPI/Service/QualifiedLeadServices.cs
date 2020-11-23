@@ -33,5 +33,18 @@ namespace ProMat.WebAPI.Service
             QualifiedLead _quaifiedLead = _qualifiedLeadRepository.GetLastQualifiedLead();
             return _quaifiedLead;
         }
+        public int DeleteAll()
+        {
+            try 
+            {
+                _qualifiedLeadRepository.DeleteAll();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+         
+        }
     }
 }

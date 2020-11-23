@@ -33,21 +33,21 @@ namespace ProMat.WebAPI
             services.AddCors(options =>
             {
 
-                options.AddPolicy("AllowAllDEV", builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200/")
-                   .AllowAnyHeader()
-                   .WithMethods("GET", "POST")
-                   .AllowCredentials();
-                });
-
                 //options.AddPolicy("AllowAllDEV", builder =>
-                // {
-                //     builder.WithOrigins("https://promat-application.herokuapp.com/")
-                //       .AllowAnyHeader()
-                //       .WithMethods("GET", "POST")
-                //        .AllowCredentials();
-                // });
+                //{
+                //    builder.WithOrigins("http://localhost:4200/")
+                //   .AllowAnyHeader()
+                //   .WithMethods("GET", "POST")
+                //   .AllowCredentials();
+                //});
+
+                options.AddPolicy("AllowAllProd", builder =>
+                 {
+                     builder.WithOrigins("http://auxilio.centralmaternidade.com.br/")
+                       .AllowAnyHeader()
+                       .WithMethods("GET", "POST")
+                        .AllowCredentials();
+                 });
             });
         }
 

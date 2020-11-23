@@ -33,5 +33,18 @@ namespace ProMat.WebAPI.Service
             DisqualifiedLead _quaifiedLead = _disQualifiedLeadRepository.GetLastDisQualifiedLeadInsertedAttendant(departmentID);
             return _quaifiedLead;
         }
+        public int DeleteAll()
+        {
+            try
+            {
+                _disQualifiedLeadRepository.DeleteAll();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
     }
 }

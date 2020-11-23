@@ -21,13 +21,10 @@ namespace ProMat.WebAPI.Service
             var ret = _weebhookRepository.Add(model);
             return ret;
         }
-        public List<Webhook> GetDepartments()
+        public List<Webhook> GetWebhooks()
         {
             return _weebhookRepository.Get();
         }
-        public List<Webhook> GetDepartmentsById(int departmentId)
-        {
-            return _weebhookRepository.GetByID(departmentId);
-        }
+     
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProMat.WebAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProMat.WebAPI.Data;
 using ProMat.WebAPI.Model;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,11 @@ namespace ProMat.WebAPI.Repository
                                             .Where(y => y.DepartmentID == departmentID)
                                             .OrderByDescending(x => x.QualifiedLeadId).FirstOrDefault();
             return ret;
+        }
+        public void DeleteAll()
+        {
+            _context.Database.ExecuteSqlRaw("DELETE FROM QualifiedLeads");
+            _context.Database.ExecuteSqlRaw("DELETE FROM sqlite_sequence WHERE NAME = 'QualifiedLeads'");
         }
     }
 }

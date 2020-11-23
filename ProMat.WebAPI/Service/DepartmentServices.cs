@@ -16,10 +16,40 @@ namespace ProMat.WebAPI.Service
             var context = new DataContext();
             _departmentRepository = new DepartmentRepository(context);
         }
-        public int InsertDepartment(Department model)
+        public int SincronizeDepartmentWithBitrix()
         {
-            var ret = _departmentRepository.Add(model);
-            return ret;
+            Bitrix24Services _serviceBitrix = new Bitrix24Services();
+            WebhookServices _serviceWebhook = new WebhookServices();
+
+            try
+            {
+                IList<Webhook> lstWebhook = _serviceWebhook.GetWebhooks();
+                DeleteAllDepartments();
+
+                foreach (Webhook webhook in lstWebhook)
+                {
+                    IList<Department> lstDepartment = _serviceBitrix.GetDepartments(webhook.WebhookPath);
+
+                    foreach (Department department in lstDepartment)
+                    {
+                        if (GetDepartmentsById(department.DepartmentId).Count == 0)
+                        {
+                            department.WebhookId = webhook.WebhookID;
+                            _departmentRepository.Add(department);
+                        }
+                    }
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
+        }
+        public void DeleteAllDepartments()
+        {
+            _departmentRepository.DeleteAll();
         }
         public List<Department> GetDepartments()
         {

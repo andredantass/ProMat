@@ -39,17 +39,21 @@ namespace ProMat.WebAPI.Service
             if (lastQualifiedLeadInsertAttendant == null)
             {
                 result.Add(nextDepartment.DepartmentId.ToString());
-                result.Add(lstAttendants[0].AttendantId);
+                result.Add(lstAttendants[0].AttendantId.ToString());
+                if (nextDepartment.WebHook != null)
+                    result.Add(nextDepartment.WebHook.WebhookPath);
             }
             else
             {
-                var nextAttendant = lstAttendants.SkipWhile(x => int.Parse(x.AttendantId) != lastQualifiedLeadInsertAttendant.AttendantID).Skip(1).FirstOrDefault();
+                var nextAttendant = lstAttendants.SkipWhile(x => x.AttendantId != lastQualifiedLeadInsertAttendant.AttendantID).Skip(1).FirstOrDefault();
 
                 if (nextAttendant == null)
                     nextAttendant = lstAttendants[0];
 
                 result.Add(nextDepartment.DepartmentId.ToString());
-                result.Add(nextAttendant.AttendantId);
+                result.Add(nextAttendant.AttendantId.ToString());
+                if (nextDepartment.WebHook != null)
+                    result.Add(nextDepartment.WebHook.WebhookPath);
             }
 
             return result;
@@ -63,7 +67,7 @@ namespace ProMat.WebAPI.Service
 
             List<Department> lstDepartments = departmentServices.GetDepartments();
             DisqualifiedLead lastDisQualifiedLeadInsert = disQualifiedLeadServices.GetLastDisQualifiedLeadInserted();
-            
+
             Department nextDepartment = null;
 
             if (lastDisQualifiedLeadInsert != null)
@@ -79,21 +83,22 @@ namespace ProMat.WebAPI.Service
             if (lastDisQualifiedLeadInsertAttendant == null)
             {
                 result.Add(nextDepartment.DepartmentId.ToString());
-                result.Add(lstAttendants[0].AttendantId);
+                result.Add(lstAttendants[0].AttendantId.ToString());
+                if (nextDepartment.WebHook != null)
+                    result.Add(nextDepartment.WebHook.WebhookPath);
             }
             else
             {
-                var nextAttendant = lstAttendants.SkipWhile(x => int.Parse(x.AttendantId) != lastDisQualifiedLeadInsertAttendant.AttendantID).Skip(1).FirstOrDefault();
+                var nextAttendant = lstAttendants.SkipWhile(x => x.AttendantId != lastDisQualifiedLeadInsertAttendant.AttendantID).Skip(1).FirstOrDefault();
 
                 if (nextAttendant == null)
                     nextAttendant = lstAttendants[0];
 
                 result.Add(nextDepartment.DepartmentId.ToString());
-                result.Add(nextAttendant.AttendantId);
+                result.Add(nextAttendant.AttendantId.ToString());
+                if (nextDepartment.WebHook != null)
+                    result.Add(nextDepartment.WebHook.WebhookPath);
             }
-
-
-
 
             return result;
         }
@@ -175,35 +180,52 @@ namespace ProMat.WebAPI.Service
         public bool InsertQualifiedLeadtoBitrixQueue(QualifiedLead form, bool isQualified, string status)
         {
             Bitrix24Services objService = new Bitrix24Services();
-            List<string> nextDepartmentAttendantQueue = GetNextUserDepartmentLeadQualifield();
-            form.InsertDate = DateTime.Now;
-            form.AttendantID = int.Parse(nextDepartmentAttendantQueue[1]);
-            form.DepartmentID = int.Parse(nextDepartmentAttendantQueue[0]);
+            try
+            {
+                List<string> nextDepartmentAttendantQueue = GetNextUserDepartmentLeadQualifield();
+                form.InsertDate = DateTime.Now;
+                form.AttendantID = int.Parse(nextDepartmentAttendantQueue[1]);
+                form.DepartmentID = int.Parse(nextDepartmentAttendantQueue[0]);
+                string webHookPath = nextDepartmentAttendantQueue[2];
 
-            objService.CreateQualifiedLead(form, form.FirstName, 12, form.FirstName, form.Phone, "fulana@hotmail.com", status);
+                objService.CreateQualifiedLead(form, webHookPath, "lead@hotmail.com", status);
 
-            return true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+           
         }
         public bool InsertDisQualifiedLeadtoBitrixQueue(QualifiedLead form, bool isQualified, string status)
         {
             Bitrix24Services objService = new Bitrix24Services();
-            DisqualifiedLead disQualifiedLead = new DisqualifiedLead();
-            List<string> nextDepartmentAttendantQueue = GetNextUserDepartmentLeadDisQualifield();
+            try
+            {
+                DisqualifiedLead disQualifiedLead = new DisqualifiedLead();
+                List<string> nextDepartmentAttendantQueue = GetNextUserDepartmentLeadDisQualifield();
+                string webHookPath = nextDepartmentAttendantQueue[2];
 
-            disQualifiedLead.AttendantID = int.Parse(nextDepartmentAttendantQueue[1]);
-            disQualifiedLead.DateBorn = form.DateBorn;
-            disQualifiedLead.DateJobEnd = form.DateJobEnd;
-            disQualifiedLead.DepartmentID = int.Parse(nextDepartmentAttendantQueue[0]);
-            disQualifiedLead.FirstName = form.FirstName;
-            disQualifiedLead.Phone = form.Phone;
-            disQualifiedLead.PrevSituation = form.PrevSituation;
-            disQualifiedLead.SegJobReceive = form.SegJobReceive;
-            disQualifiedLead.Situation = form.Situation;
-            disQualifiedLead.InsertDate = DateTime.Now;
+                disQualifiedLead.AttendantID = int.Parse(nextDepartmentAttendantQueue[1]);
+                disQualifiedLead.DateBorn = form.DateBorn;
+                disQualifiedLead.DateJobEnd = form.DateJobEnd;
+                disQualifiedLead.DepartmentID = int.Parse(nextDepartmentAttendantQueue[0]);
+                disQualifiedLead.FirstName = form.FirstName;
+                disQualifiedLead.Phone = form.Phone;
+                disQualifiedLead.PrevSituation = form.PrevSituation;
+                disQualifiedLead.SegJobReceive = form.SegJobReceive;
+                disQualifiedLead.Situation = form.Situation;
+                disQualifiedLead.InsertDate = DateTime.Now;
 
-            objService.CreateDisQualifiedLead(disQualifiedLead, form.FirstName, 12, form.FirstName, form.Phone, "fulana@hotmail.com", status);
+                objService.CreateDisQualifiedLead(disQualifiedLead, webHookPath, "lead@hotmail.com", status);
 
-            return true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

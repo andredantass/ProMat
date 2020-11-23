@@ -40,7 +40,12 @@ namespace ProMat.WebAPI.Repository
         }
         public List<Attendant> Get()
         {
-            return _context.Attendants.ToList();
+            return _context.Attendants.OrderBy(x => x.AttendantId).ToList();
+        }
+        public List<Attendant> GetByID(int attendantID)
+        {
+            var ret = _context.Attendants.Where(x => x.AttendantId == attendantID);
+            return ret.ToList();
         }
         public List<Attendant> GetByDepartmentID(int departmentID)
         {

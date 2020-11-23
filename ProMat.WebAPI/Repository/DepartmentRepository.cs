@@ -40,7 +40,8 @@ namespace ProMat.WebAPI.Repository
         }
         public List<Department> Get()
         {
-            return _context.Departments.ToList();
+            return _context.Departments.Include(x => x.WebHook).
+                OrderBy(x => x.DepartmentId).ToList();
         }
         public List<Department> GetByID(int departmentID)
         {

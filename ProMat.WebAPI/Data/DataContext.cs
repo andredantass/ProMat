@@ -20,6 +20,13 @@ namespace ProMat.WebAPI.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<Webhook> Webhook { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Department>().HasOne(web => web.WebHook);
+
+            base.OnModelCreating(modelBuilder);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

@@ -11,7 +11,7 @@ namespace ProMat.WebAPI.Model
     }
     public class Attendant
     {
-        public string AttendantId { get; set; }
+        public int AttendantId { get; set; }
         public int DepartmentId { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }

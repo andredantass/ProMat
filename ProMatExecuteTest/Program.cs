@@ -13,12 +13,16 @@ namespace ProMatExecuteTest
             AttendantServices attedantasService = new AttendantServices();
             FormServices formService = new FormServices();
 
+            DepartmentServices departmentServices = new DepartmentServices();
+  
+            List<Department> lstDepartments = departmentServices.GetDepartments();
+
             //objService.CreateLead("Silvia Aparecida", 12, "Silvia Aparecida", "1198987787", "andre.dantass@outlook.com","NEW");
             //objService.CreateLead("Amanda Nunes", 12, "Amanda Nunes", "1198987787", "amanda.nunces@outlook.com", "1");
             //objService.CreateLead("Renata dos Santos", 12, "Renata dos Santos", "1198987787", "renata.dossantos@outlook.com", "IN_PROCESS");
             //objService.GetDepartments();
             //List<Attendant> lstAttendants = attedantasService.GetAttendants();
-            objService.GetEmployeeDepartments();
+            //objService.GetEmployeeDepartments();
             //List<string> lstString = formService.GetNextUserDepartmentLeadDisQualifield();
             Console.WriteLine("Hello World!");
         }

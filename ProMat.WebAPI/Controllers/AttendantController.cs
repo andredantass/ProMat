@@ -29,10 +29,30 @@ namespace ProMat.WebAPI.Controllers
 
         [HttpGet]
         [Route("UpdateAttendantStructure")]
-        public void UpdateAttendantStructure()
+        public ResponseDTO UpdateAttendantStructure()
         {
-            //Service.GoogleServices googleService = new Service.GoogleServices();
-            //googleService.ReadGoogleSheets();
+            AttendantServices attendantService = new AttendantServices();
+            var response = new ResponseDTO();
+
+            try
+            {
+                var ret = attendantService.SincronizeAttendantWithBitrix();
+
+                if (ret == 1)
+                {
+                    response.Data = new { sucesso = 1, message = "Departamentos atualizados com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível atualizar os departamentos!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
       
        
