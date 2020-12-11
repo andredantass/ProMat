@@ -188,7 +188,7 @@ namespace ProMat.WebAPI.Service
                 form.DepartmentID = int.Parse(nextDepartmentAttendantQueue[0]);
                 string webHookPath = nextDepartmentAttendantQueue[2];
 
-                objService.CreateQualifiedLead(form, webHookPath, "lead@hotmail.com", status);
+                objService.CreateQualifiedLead(form, webHookPath, "lead@hotmail.com", status, false);
 
                 return true;
             }
@@ -218,7 +218,7 @@ namespace ProMat.WebAPI.Service
                 disQualifiedLead.Situation = form.Situation;
                 disQualifiedLead.InsertDate = DateTime.Now;
 
-                objService.CreateDisQualifiedLead(disQualifiedLead, webHookPath, "lead@hotmail.com", status);
+                objService.CreateDisQualifiedLead(disQualifiedLead, webHookPath, "lead@hotmail.com", status, false);
 
                 return true;
             }

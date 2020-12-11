@@ -35,8 +35,7 @@ namespace ProMat.WebAPI.Repository
         }
         public void DeleteAll()
         {
-            _context.Database.ExecuteSqlRaw("DELETE FROM Attendants");
-            _context.Database.ExecuteSqlRaw("DELETE FROM sqlite_sequence WHERE NAME = 'Attendants'");
+            _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Attendants");
         }
         public List<Attendant> Get()
         {

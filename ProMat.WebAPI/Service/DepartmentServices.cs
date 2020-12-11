@@ -32,7 +32,7 @@ namespace ProMat.WebAPI.Service
 
                     foreach (Department department in lstDepartment)
                     {
-                        if (GetDepartmentsById(department.DepartmentId).Count == 0)
+                        if (GetDepartmentsById(department.DepartmentId) == null)
                         {
                             department.WebhookId = webhook.WebhookID;
                             _departmentRepository.Add(department);
@@ -55,7 +55,7 @@ namespace ProMat.WebAPI.Service
         {
             return _departmentRepository.Get();
         }
-        public List<Department> GetDepartmentsById(int departmentId)
+        public Department GetDepartmentsById(int departmentId)
         {
             return _departmentRepository.GetByID(departmentId);
         }

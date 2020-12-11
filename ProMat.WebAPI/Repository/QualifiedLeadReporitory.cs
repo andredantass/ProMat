@@ -28,6 +28,10 @@ namespace ProMat.WebAPI.Repository
             QualifiedLead ret = _context.QualifiedLeads.OrderByDescending(x => x.QualifiedLeadId).FirstOrDefault();
             return ret;
         }
+        public IList<QualifiedLead> GetAll()
+        {
+            return _context.QualifiedLeads.ToList();
+        }
         public QualifiedLead GetLastQualifiedLeadInsertedAttendant(int departmentID)
         {
             QualifiedLead ret = _context.QualifiedLeads

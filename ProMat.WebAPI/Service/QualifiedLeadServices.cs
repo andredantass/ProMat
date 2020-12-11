@@ -33,9 +33,36 @@ namespace ProMat.WebAPI.Service
             QualifiedLead _quaifiedLead = _qualifiedLeadRepository.GetLastQualifiedLead();
             return _quaifiedLead;
         }
+        public int ReprocessQualifiedLeadsContingency()
+        {
+            DepartmentServices _serviceDepartment = new DepartmentServices();
+            Bitrix24Services objService = new Bitrix24Services();
+
+            try
+            {
+                foreach (QualifiedLead lead in GetAll())
+                {
+
+                    Department itemDepartment = _serviceDepartment.GetDepartmentsById(lead.DepartmentID);
+                    string webHookPath = itemDepartment.WebHook.WebhookPath;
+                   
+                    objService.CreateQualifiedLead(lead, webHookPath, "lead@hotmail.com", "", true);
+
+                }
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public IList<QualifiedLead> GetAll()
+        {
+            return _qualifiedLeadRepository.GetAll();
+        }
         public int DeleteAll()
         {
-            try 
+            try
             {
                 _qualifiedLeadRepository.DeleteAll();
                 return 1;
@@ -44,7 +71,7 @@ namespace ProMat.WebAPI.Service
             {
                 return 0;
             }
-         
+
         }
     }
 }

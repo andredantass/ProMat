@@ -15,7 +15,7 @@ namespace ProMat.WebAPI.Service
 {
     public class Bitrix24Services
     {
-        public void CreateDisQualifiedLead(DisqualifiedLead disqualifiedLead, string webHookPath, string email, string status)
+        public void CreateDisQualifiedLead(DisqualifiedLead disqualifiedLead, string webHookPath, string email, string status, bool reprocess)
         {
             DisQualifiedLeadServices disQualifiedLeadService = new DisQualifiedLeadServices();
 
@@ -26,17 +26,14 @@ namespace ProMat.WebAPI.Service
 
                 string url = string.Format("{0}crm.lead.add.json", webHookPath);
                 string queue = status;
-
-                //HasYouWorked hasYouWorkObj = HasYouWorked.Empty;
-                //ReceivedWorkInsurances receivedWorkInsurancesObj = ReceivedWorkInsurances.Empty;
-
-                //if (disqualifiedLead.SegJobReceive != null)
-                //    if (!disqualifiedLead.SegJobReceive.Equals(""))
-                //        receivedWorkInsurancesObj = (ReceivedWorkInsurances)Enum.Parse(typeof(ReceivedWorkInsurances), form.SegJobReceive);
-
-                //if (disqualifiedLead.PrevSituation != null)
-                //    if (!disqualifiedLead.PrevSituation.Equals(""))
-                //        hasYouWorkObj = (HasYouWorked)Enum.Parse(typeof(HasYouWorked), disqualifiedLead.PrevSituation);
+                string sourceID = "";
+                string DateJobEnd = "";
+                string DateBorn = "";
+                string PrevSituationStart = "";
+                string SituationStart = "";
+                int PrevSituation = 0;
+                int Situation = 0;
+                int SegJobReceive = 0;
 
                 //if (status == "DPP")
                 //    queue = "IN_PROCESS";
@@ -47,64 +44,107 @@ namespace ProMat.WebAPI.Service
                 //else
                 //    queue = "NEW";
 
-                int PrevSituation = 0;
-                int SegJobReceive = 0;
+                if (webHookPath.Contains("startprev"))
+                {
+                    SituationStart = Utility.Util.GetYouAreItemFormStart(disqualifiedLead.Situation);
+                    queue = "NEW";
+                    sourceID = "4";
 
-                string comments = disqualifiedLead.Situation;
+                    if (disqualifiedLead.PrevSituation != null && disqualifiedLead.PrevSituation != "")
+                        PrevSituationStart = Utility.Util.GetPrevSituationItemFormStart(disqualifiedLead.PrevSituation);
+                    if (disqualifiedLead.SegJobReceive != null && disqualifiedLead.SegJobReceive != "")
+                        SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemFormStart(disqualifiedLead.SegJobReceive);
+                    if (disqualifiedLead.DateJobEnd != null && disqualifiedLead.DateJobEnd != "")
+                        DateJobEnd = disqualifiedLead.DateJobEnd;
+                    if (disqualifiedLead.DateBorn != null && disqualifiedLead.DateBorn != "")
+                        DateBorn = disqualifiedLead.DateBorn;
 
-                int Situation = Utility.Util.GetYouAreItemForm(disqualifiedLead.Situation);
-                if (disqualifiedLead.PrevSituation != null && disqualifiedLead.PrevSituation != "")
-                {
-                    PrevSituation = Utility.Util.GetPrevSituationItemForm(disqualifiedLead.PrevSituation);
-                    comments += "/" + disqualifiedLead.PrevSituation;
-                }
-                if (disqualifiedLead.SegJobReceive != null && disqualifiedLead.SegJobReceive != "")
-                {
-                    SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemForm(disqualifiedLead.SegJobReceive);
-                    comments += "/" + disqualifiedLead.SegJobReceive;
-                }
-                if(disqualifiedLead.DateJobEnd != null && disqualifiedLead.DateJobEnd != "")
-                {
-                    comments += "/Job End Date =" + disqualifiedLead.DateJobEnd;
-                }
-                if (disqualifiedLead.DateBorn != null && disqualifiedLead.DateBorn != "")
-                {
-                    comments += "/Date Born =" + disqualifiedLead.DateBorn;
-                }
 
-                queue = "8";
-
-                var data = new
-                {
-                    fields = new
+                    var data = new
                     {
-                        TITLE = disqualifiedLead.FirstName,
-                        NAME = disqualifiedLead.FirstName,
-                        STATUS_ID = queue,
-                        OPENED = "Y",
-                        OPPORTUNITY = 12,
-                        ASSIGNED_BY_ID = disqualifiedLead.AttendantID,
-                        COMPANY_TITLE = disqualifiedLead.FirstName,
-                        SOURCE_ID = "1",
-                        UF_CRM_1597496714 = Situation,
-                        UF_CRM_1597497342 = PrevSituation,
-                        UF_CRM_1597497546 = SegJobReceive,
-                        UF_CRM_1597497700 = disqualifiedLead.DateJobEnd != null ? disqualifiedLead.DateJobEnd : "",
-                        UF_CRM_1580316545358 = disqualifiedLead.DateBorn != null ? disqualifiedLead.DateBorn : "",
-                        COMMENTS = webHookPath.Contains("startprev") ? comments : "(NQ)",
-                        //UF_CRM_1577711078940 = 4293,
-                        //UF_CRM_1605798367693 = "TESTE2",
-                        //UF_CRM_1605803452106 = "64",
-                        //UF_CRM_1605728591038 = "44",
-                        //UF_CRM_1605803452106 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "62",  VALUE = "Sim" } }.ToArray(),
-                        PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = disqualifiedLead.Phone } }.ToArray()
-                        //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
-                    },
-                    @params = new
+                        fields = new
+                        {
+                            TITLE = disqualifiedLead.FirstName,
+                            NAME = disqualifiedLead.FirstName,
+                            STATUS_ID = queue,
+                            OPENED = "Y",
+                            ASSIGNED_BY_ID = disqualifiedLead.AttendantID,
+                            COMPANY_TITLE = disqualifiedLead.FirstName,
+                            SOURCE_ID = sourceID,
+                            COMMENTS = "(Q)",
+                            UF_CRM_1606226135410 = SituationStart,
+                            UF_CRM_1606226151075 = PrevSituationStart,
+                            UF_CRM_1601980780168 = SegJobReceive,
+                            UF_CRM_1601984930150 = DateJobEnd,
+                            UF_CRM_1601980069351 = DateBorn,
+
+                            //COMPANY_TITLE = contactName,
+                            //UF_CRM_1605728591038 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "44", VALUE = "TRABALHEI REGISTRADA antes do nascer." } }.ToArray(),
+                            PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = disqualifiedLead.Phone } }.ToArray()
+                            //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
+                        },
+                        @params = new
+                        {
+                            REGISTER_SONET_EVENT = "Y"
+                        }
+                    };
+
+                    PostToAPI(url, "", data);
+                    if (!reprocess)
+                        disQualifiedLeadService.InsertDisQualifiedLead(disqualifiedLead);
+                }
+                else
+                {
+                    Situation = Utility.Util.GetYouAreItemForm(disqualifiedLead.Situation);
+                    queue = "8";
+                    sourceID = "1";
+
+                    if (disqualifiedLead.PrevSituation != null && disqualifiedLead.PrevSituation != "")
+                        PrevSituation = Utility.Util.GetPrevSituationItemForm(disqualifiedLead.PrevSituation);
+                    if (disqualifiedLead.SegJobReceive != null && disqualifiedLead.SegJobReceive != "")
+                        SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemForm(disqualifiedLead.SegJobReceive);
+                    if (disqualifiedLead.DateJobEnd != null && disqualifiedLead.DateJobEnd != "")
+                        DateJobEnd = disqualifiedLead.DateJobEnd;
+                    if (disqualifiedLead.DateBorn != null && disqualifiedLead.DateBorn != "")
+                        DateBorn = disqualifiedLead.DateBorn;
+
+                    var data = new
                     {
-                        REGISTER_SONET_EVENT = "Y"
-                    }
-                };
+                        fields = new
+                        {
+                            TITLE = disqualifiedLead.FirstName,
+                            NAME = disqualifiedLead.FirstName,
+                            STATUS_ID = queue,
+                            OPENED = "Y",
+                            OPPORTUNITY = 12,
+                            ASSIGNED_BY_ID = disqualifiedLead.AttendantID,
+                            COMPANY_TITLE = disqualifiedLead.FirstName,
+                            SOURCE_ID = sourceID,
+                            UF_CRM_1597496714 = Situation,
+                            UF_CRM_1597497342 = PrevSituation,
+                            UF_CRM_1597497546 = SegJobReceive,
+                            UF_CRM_1597497700 = disqualifiedLead.DateJobEnd != null ? disqualifiedLead.DateJobEnd : "",
+                            UF_CRM_1580316545358 = disqualifiedLead.DateBorn != null ? disqualifiedLead.DateBorn : "",
+                            COMMENTS = "(NQ)",
+                            //UF_CRM_1577711078940 = 4293,
+                            //UF_CRM_1605798367693 = "TESTE2",
+                            //UF_CRM_1605803452106 = "64",
+                            //UF_CRM_1605728591038 = "44",
+                            //UF_CRM_1605803452106 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "62",  VALUE = "Sim" } }.ToArray(),
+                            PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = disqualifiedLead.Phone } }.ToArray()
+                            //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
+                        },
+                        @params = new
+                        {
+                            REGISTER_SONET_EVENT = "Y"
+                        }
+                    };
+                    PostToAPI(url, "", data);
+                    if (!reprocess)
+                        disQualifiedLeadService.InsertDisQualifiedLead(disqualifiedLead);
+
+                }
+
 
                 //BitrixLead lead = new BitrixLead();
 
@@ -124,14 +164,13 @@ namespace ProMat.WebAPI.Service
                 //    lead.EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray();
 
 
-                PostToAPI(url, "", data);
-                disQualifiedLeadService.InsertDisQualifiedLead(disqualifiedLead);
+
             }
             catch (Exception exc)
             {
             }
         }
-        public void CreateQualifiedLead(QualifiedLead qualifiedLead, string webHookPath, string email, string status)
+        public void CreateQualifiedLead(QualifiedLead qualifiedLead, string webHookPath, string email, string status, bool reprocess)
         {
             FormServices formService = new FormServices();
             QualifiedLeadServices qualifiedLeadService = new QualifiedLeadServices();
@@ -143,6 +182,15 @@ namespace ProMat.WebAPI.Service
 
                 string url = string.Format("{0}crm.lead.add.json", webHookPath);
                 string queue = status;
+                string sourceID = "";
+                string DateJobEnd = "";
+                string DateBorn = "";
+                string PrevSituationStart = "";
+                string SituationStart = "";
+                int PrevSituation = 0;
+                int Situation = 0;
+                int SegJobReceive = 0;
+
 
                 //if (status == "DPP")
                 //    queue = "IN_PROCESS";
@@ -153,61 +201,110 @@ namespace ProMat.WebAPI.Service
                 //else
                 //    queue = "NEW";
 
-                queue = "8";
+                if (webHookPath.Contains("startprev"))
+                {
+                    SituationStart = Utility.Util.GetYouAreItemFormStart(qualifiedLead.Situation);
+                    queue = "NEW";
+                    sourceID = "4";
 
-                int PrevSituation = 0;
-                int SegJobReceive = 0;
-
-                int Situation = Utility.Util.GetYouAreItemForm(qualifiedLead.Situation);
-                string comments = qualifiedLead.Situation;
-
-                if (qualifiedLead.PrevSituation != null && qualifiedLead.PrevSituation != "")
-                {
-                    PrevSituation = Utility.Util.GetPrevSituationItemForm(qualifiedLead.PrevSituation);
-                    comments += "/" + qualifiedLead.PrevSituation;
-                }
-                if (qualifiedLead.SegJobReceive != null && qualifiedLead.SegJobReceive != "")
-                {
-                    SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemForm(qualifiedLead.SegJobReceive);
-                    comments += "/" + qualifiedLead.SegJobReceive;
-                }
-                if (qualifiedLead.DateJobEnd != null && qualifiedLead.DateJobEnd != "")
-                {
-                    comments += "/Job End Date =" + qualifiedLead.DateJobEnd;
-                }
-                if (qualifiedLead.DateBorn != null && qualifiedLead.DateBorn != "")
-                {
-                    comments += "/Date Born =" + qualifiedLead.DateBorn;
-                }
+                    if (qualifiedLead.PrevSituation != null && qualifiedLead.PrevSituation != "")
+                        PrevSituationStart = Utility.Util.GetPrevSituationItemFormStart(qualifiedLead.PrevSituation);
+                    if (qualifiedLead.SegJobReceive != null && qualifiedLead.SegJobReceive != "")
+                        SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemFormStart(qualifiedLead.SegJobReceive);
+                    if (qualifiedLead.DateJobEnd != null && qualifiedLead.DateJobEnd != "")
+                        DateJobEnd = qualifiedLead.DateJobEnd;
+                    if (qualifiedLead.DateBorn != null && qualifiedLead.DateBorn != "")
+                        DateBorn = qualifiedLead.DateBorn;
 
 
-                var data = new
-                {
-                    fields = new
+                    var data = new
                     {
-                        TITLE = qualifiedLead.FirstName ,
-                        NAME = qualifiedLead.FirstName,
-                        STATUS_ID = queue,
-                        OPENED = "Y",
-                        ASSIGNED_BY_ID = qualifiedLead.AttendantID,
-                        COMPANY_TITLE = qualifiedLead.FirstName,
-                        SOURCE_ID = "1",
-                        UF_CRM_1597496714 = Situation,
-                        UF_CRM_1597497342 = PrevSituation,
-                        UF_CRM_1597497546 = SegJobReceive,
-                        UF_CRM_1597497700 = qualifiedLead.DateJobEnd != null ? qualifiedLead.DateJobEnd : "",
-                        UF_CRM_1580316545358 = qualifiedLead.DateBorn != null ? qualifiedLead.DateBorn : "",
-                        COMMENTS = webHookPath.Contains("startprev") ? comments : "(Q)",
-                        //COMPANY_TITLE = contactName,
-                        //UF_CRM_1605728591038 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "44", VALUE = "TRABALHEI REGISTRADA antes do nascer." } }.ToArray(),
-                        PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = qualifiedLead.Phone } }.ToArray()
-                        //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
-                    },
-                    @params = new
+                        fields = new
+                        {
+                            TITLE = qualifiedLead.FirstName,
+                            NAME = qualifiedLead.FirstName,
+                            STATUS_ID = queue,
+                            OPENED = "Y",
+                            ASSIGNED_BY_ID = qualifiedLead.AttendantID,
+                            COMPANY_TITLE = qualifiedLead.FirstName,
+                            SOURCE_ID = sourceID,
+                            COMMENTS = "(Q)",
+                            UF_CRM_1606226135410 = SituationStart,
+                            UF_CRM_1606226151075 = PrevSituationStart,
+                            UF_CRM_1601980780168 = SegJobReceive,
+                            UF_CRM_1601984930150 = DateJobEnd,
+                            UF_CRM_1601980069351 = DateBorn,
+
+                            //COMPANY_TITLE = contactName,
+                            //UF_CRM_1605728591038 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "44", VALUE = "TRABALHEI REGISTRADA antes do nascer." } }.ToArray(),
+                            PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = qualifiedLead.Phone } }.ToArray()
+                            //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
+                        },
+                        @params = new
+                        {
+                            REGISTER_SONET_EVENT = "Y"
+                        }
+                    };
+
+                    PostToAPI(url, "", data);
+                    if (!reprocess)
+                        qualifiedLeadService.InsertQualifiedLead(qualifiedLead);
+
+                }
+                else
+                {
+                    Situation = Utility.Util.GetYouAreItemForm(qualifiedLead.Situation);
+                    queue = "8";
+                    sourceID = "1";
+                    if (qualifiedLead.PrevSituation != null && qualifiedLead.PrevSituation != "")
+                        PrevSituation = Utility.Util.GetPrevSituationItemForm(qualifiedLead.PrevSituation);
+                    if (qualifiedLead.SegJobReceive != null && qualifiedLead.SegJobReceive != "")
+                        SegJobReceive = Utility.Util.GetReceivedWorkInsurancesItemForm(qualifiedLead.SegJobReceive);
+                    if (qualifiedLead.DateJobEnd != null && qualifiedLead.DateJobEnd != "")
+                        DateJobEnd = qualifiedLead.DateJobEnd;
+                    if (qualifiedLead.DateBorn != null && qualifiedLead.DateBorn != "")
+                        DateBorn = qualifiedLead.DateBorn;
+
+
+                    var data = new
                     {
-                        REGISTER_SONET_EVENT = "Y"
-                    }
-                };
+                        fields = new
+                        {
+                            TITLE = qualifiedLead.FirstName,
+                            NAME = qualifiedLead.FirstName,
+                            STATUS_ID = queue,
+                            OPENED = "Y",
+                            ASSIGNED_BY_ID = qualifiedLead.AttendantID,
+                            COMPANY_TITLE = qualifiedLead.FirstName,
+                            SOURCE_ID = sourceID,
+                            COMMENTS = "(Q)",
+                            UF_CRM_1597496714 = Situation,
+                            UF_CRM_1597497342 = PrevSituation,
+                            UF_CRM_1597497546 = SegJobReceive,
+                            UF_CRM_1597497700 = DateJobEnd,
+                            UF_CRM_1580316545358 = DateBorn,
+
+                            //COMPANY_TITLE = contactName,
+                            //UF_CRM_1605728591038 = new List<UF_CRM_1605728591038>() { new UF_CRM_1605728591038() { ID = "44", VALUE = "TRABALHEI REGISTRADA antes do nascer." } }.ToArray(),
+                            PHONE = new List<Phone>() { new Phone() { VALUE_TYPE = "WORK", TYPE_ID = "PHONE", VALUE = qualifiedLead.Phone } }.ToArray()
+                            //EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray()
+                        },
+                        @params = new
+                        {
+                            REGISTER_SONET_EVENT = "Y"
+                        }
+                    };
+
+                    PostToAPI(url, "", data);
+                    if (!reprocess)
+                        qualifiedLeadService.InsertQualifiedLead(qualifiedLead);
+                }
+
+
+
+
+
+
 
                 //BitrixLead lead = new BitrixLead();
 
@@ -227,8 +324,7 @@ namespace ProMat.WebAPI.Service
                 //    lead.EMAIL = new List<Email>() { new Email() { VALUE_TYPE = "WORK", TYPE_ID = "EMAIL", VALUE = email } }.ToArray();
 
 
-                PostToAPI(url, "", data);
-                qualifiedLeadService.InsertQualifiedLead(qualifiedLead);
+
             }
             catch (Exception exc)
             {

@@ -66,6 +66,33 @@ namespace ProMat.WebAPI.Utility
                     return 0;
             }
         }
+
+        public static int GetReceivedWorkInsurancesItemFormStart(string SegJobReceive)
+        {
+            ReceivedWorkInsurances receivedWorkInsurancesObj = (ReceivedWorkInsurances)Enum.Parse(typeof(ReceivedWorkInsurances), SegJobReceive);
+
+            switch (receivedWorkInsurancesObj)
+            {
+                case ReceivedWorkInsurances.Yes:
+                    return 101;
+                case ReceivedWorkInsurances.No:
+                    return 103;
+                default:
+                    return 0;
+            }
+        }
+        public static string GetPrevSituationItemFormStart(string PrevSituation)
+        {
+            HasYouWorked hasYouWorkObj = (HasYouWorked)Enum.Parse(typeof(HasYouWorked), PrevSituation);
+            return GetDescription<HasYouWorked>(hasYouWorkObj);
+           
+        }
+        public static string GetYouAreItemFormStart(string Situation)
+        {
+            YouAre youAreObj = (YouAre)Enum.Parse(typeof(YouAre), Situation);
+            return GetDescription<YouAre>(youAreObj);
+           
+        }
         public static void StoreLastCompany(string currentCompanyUser, string path)
         {
             using (StreamWriter file = new StreamWriter(path))

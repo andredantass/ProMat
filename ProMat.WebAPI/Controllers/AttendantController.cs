@@ -40,7 +40,7 @@ namespace ProMat.WebAPI.Controllers
 
                 if (ret == 1)
                 {
-                    response.Data = new { sucesso = 1, message = "Departamentos atualizados com sucesso!" };
+                    response.Data = new { sucesso = 1, message = "Atendentes atualizados com sucesso!" };
                 }
                 else
                 {

@@ -28,6 +28,10 @@ namespace ProMat.WebAPI.Repository
             DisqualifiedLead ret = _context.DisqualifiedLeads.OrderByDescending(x => x.DisqualifiedLeadId).FirstOrDefault();
             return ret;
         }
+        public IList<DisqualifiedLead> GetAll()
+        {
+            return _context.DisqualifiedLeads.ToList();
+        }
         public DisqualifiedLead GetLastDisQualifiedLeadInsertedAttendant(int departmentID)
         {
             DisqualifiedLead ret = _context.DisqualifiedLeads

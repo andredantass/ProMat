@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace ProMat.WebAPI.Data
 {
@@ -38,9 +39,10 @@ namespace ProMat.WebAPI.Data
                  .Build();
 
             string connectionString = configuration.GetConnectionString("DefaultConnection");
-            //connectionString = string.Format(connectionString, AppDomain.CurrentDomain.BaseDirectory);
 
-            optionsBuilder.UseSqlite(connectionString);
+            //connectionString = string.Format(connectionString, AppDomain.CurrentDomain.BaseDirectory);
+            optionsBuilder.UseMySql(connectionString);
+            //optionsBuilder.UseSqlite(connectionString);
            
 
             

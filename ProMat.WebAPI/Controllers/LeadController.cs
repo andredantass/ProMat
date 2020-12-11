@@ -25,6 +25,64 @@ namespace ProMat.WebAPI.Controllers
     [ApiController]
     public class LeadController : ControllerBase
     {
+
+
+        [HttpGet]
+        [Route("ReprocessQualifiedLeadsContingency")]
+        public ResponseDTO ReprocessQualifiedLeadsContingency()
+        {
+            QualifiedLeadServices service = new QualifiedLeadServices();
+            var response = new ResponseDTO();
+
+            try
+            {
+                var ret = service.ReprocessQualifiedLeadsContingency();
+
+                if (ret == 1)
+                {
+                    response.Data = new { sucesso = 1, message = "Todos os leads foram reprocessados com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível reprocessars os leads qualificados!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        [HttpGet]
+        [Route("ReprocessDisQualifiedLeadsContingency")]
+        public ResponseDTO ReprocessDisQualifiedLeadsContingency()
+        {
+            DisQualifiedLeadServices service = new DisQualifiedLeadServices();
+            var response = new ResponseDTO();
+
+            try
+            {
+                var ret = service.ReprocessDisQualifiedLeadsContingency();
+
+                if (ret == 1)
+                {
+                    response.Data = new { sucesso = 1, message = "Todos os leads foram reprocessados com sucesso!" };
+                }
+                else
+                {
+                    response.Data = new { sucesso = 0, message = "Não foi possível reprocessars os leads qualificados!" };
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
         [HttpGet]
         [Route("RemoveQualifiedLeads")]
         public ResponseDTO RemoveQualifiedLeads()
@@ -35,7 +93,7 @@ namespace ProMat.WebAPI.Controllers
             try
             {
                 var ret = service.DeleteAll();
-               
+
                 if (ret == 1)
                 {
                     response.Data = new { sucesso = 1, message = "Todos os leads qualificados foram deletados com sucesso!" };

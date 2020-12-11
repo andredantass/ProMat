@@ -35,18 +35,19 @@ namespace ProMat.WebAPI.Repository
         }
         public void DeleteAll()
         {
-            _context.Database.ExecuteSqlRaw("DELETE FROM Departments");
-            _context.Database.ExecuteSqlRaw("DELETE FROM sqlite_sequence WHERE NAME = 'Departments'");
+            _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Departments");
         }
         public List<Department> Get()
         {
             return _context.Departments.Include(x => x.WebHook).
                 OrderBy(x => x.DepartmentId).ToList();
         }
-        public List<Department> GetByID(int departmentID)
+        public Department GetByID(int departmentID)
         {
-            var result = _context.Departments.Where(x => x.DepartmentId == departmentID);
-            return result.ToList();
+            var result = _context.Departments.Include(x => x.WebHook)
+                                             .Where(x => x.DepartmentId == departmentID)
+                                             .FirstOrDefault();
+            return result;
         }
     }
 }
