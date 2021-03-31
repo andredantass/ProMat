@@ -43,7 +43,7 @@ namespace ProMat.WebAPI
 
                 options.AddPolicy("AllowAllProd", builder =>
                  {
-                     builder.WithOrigins("https://auxilio.centralmaternidade.com.br/")
+                     builder.WithOrigins("http://auxilio.luxassessoriajuridica.com.br/")
                        .AllowAnyHeader()
                        .WithMethods("GET", "POST")
                         .AllowCredentials();
