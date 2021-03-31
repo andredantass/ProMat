@@ -1,0 +1,208 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+p {
+	font-weight: 300;
+	color: #333;
+}
+
+h1 {
+	font-weight: 500;
+}
+
+h2 {
+	font-weight: 400;
+	font-size: 22px;
+}
+
+html {
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	padding: 10px;
+}
+
+body {
+	background: url(../img/background.jpg) no-repeat;
+	background-size:auto;
+	width: 100%;
+	height: 100%;
+}
+main, section {
+	width: 105%;
+	height: 100%;
+}
+
+/* Background Color */
+
+.mymodal {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0,0,0,0.3);
+}
+
+.mymodal .copy {
+	text-align: left;
+	width: calc(100% - 30px);
+	color: white;
+	padding: 40px 15px;
+	display: flex;
+	justify-content: center;
+
+}
+
+.mymodal .copy i {
+	font-size: 36px;
+	margin: 0 20px 0 0;
+}
+@media only screen and (max-width: 3500px) {
+	[class*="copy"] {
+		margin-top: -50px;
+    }
+
+  }
+.mymodal .copy .copy-text {
+	width: 25%;
+    min-width: 250px;
+}
+
+/* Box layout */
+
+.box {
+	background-color: white;
+	width: 20%;
+	min-width: 300px;
+	height: 150px;
+	border-radius: 15px;
+	box-shadow: 0 0 30px 5px;
+	display: none;
+}
+
+.info-space {
+	height: 150PX;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.info {
+	height: 100%;
+}
+
+.info .content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 50%;
+}
+
+.info .content:nth-child(1) > div {
+	width: 90%;
+	text-align: center;
+	border-bottom: solid 1px #ccc;
+    padding: 20px 0;
+}
+
+.info .content:nth-child(2) > div {
+	width: 100%;
+	text-align: center;
+}
+
+.info .content button {
+	width: 25%;
+	margin: 0 10px;
+	background-color: #d8b66e;
+	color: white;
+	padding: 7px 10px;
+	border: 2px white solid;
+	cursor: pointer;
+}
+
+.info .content button:hover {
+	box-shadow: 0px 0px 0px 2px #d8b66e;
+}
+
+.info .content button:focus {
+	outline: none;
+}
+
+.info .content h4 i {
+	margin: 0 10px;
+	color: #d8b66e;
+}
+
+.parabens .content h4 {
+	font-size: 15px;
+    font-weight: 300;
+}
+
+.parabens h2 {
+	font-size: 16px;
+}
+
+.parabens .info-space {
+	height: 200px;
+}
+.parabens .box {
+	height: 200px;
+}
+
+.parabens .info .content:nth-child(1) {
+	height: 70%;
+}
+
+.parabens .info .content:nth-child(2) {
+	height: 30%;
+}
+
+.indicar .content h4 {
+	font-size: 15px;
+    font-weight: 300;
+}
+
+.indicar h1 {
+	font-size: 16px;
+	text-transform: uppercase;
+}
+.indicar h2 {
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.indicar .info-space {
+	height: 300px;
+}
+.indicar .box {
+	height: 300px;
+}
+
+.indicar .info .content:nth-child(1) {
+	height: 70%;
+}
+
+.indicar .info .content:nth-child(2) {
+	height: 30%;
+}
+
+
+/* Zoom Animação */
+
+.animacao {
+	animation: zoom 1s;
+}
+
+@keyframes zoom {
+	from {transform: scale(0)}
+	to {transform: scale(1)}
+}
