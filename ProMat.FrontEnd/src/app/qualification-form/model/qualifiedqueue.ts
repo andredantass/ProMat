@@ -4,8 +4,8 @@ export class QualifiedQueue
     FirstName: string;
     Phone: string;
     Situation: string;
-    DateBorn: Date ;
+    DateBorn: string ;
     PrevSituation: string;
-    DateJobEnd: Date ;
+    DateJobEnd: string ;
     SegJobReceive: string;
 }

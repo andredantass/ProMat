@@ -93,9 +93,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-
-            ]
+            "scripts": []
           }
         },
         "lint": {
@@ -124,6 +122,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ProMat-App"
+    }
+  },
+  "defaultProject": "ProMat-App",
+  "cli": {
+    "analytics": false
+  }
 }

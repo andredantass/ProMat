@@ -29,6 +29,7 @@
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
+    "ngx-mask": "^11.1.5",
     "ngx-toastr": "^13.1.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.9.0",

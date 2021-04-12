@@ -61,7 +61,8 @@
                                                                 id="LEAD_PHONE"
                                                                 class="form-control crm-webform-input crm-webform-input-phone"
                                                                 type="number"
-                                                                placeholder="(XX) XXXXX-XXXX"> <b
+                                                                placeholder="(XX) XXXXX-XXXX"
+                                                                mask="(00) 00000-0000"> <b
                                                                 *ngIf="f.phone.errors?.required"
                                                                 class="tooltip crm-webform-tooltip-bottom-right">Preencher
                                                                 todos os campos obrigatórios</b>
@@ -136,13 +137,15 @@
                                                             <i class="crm-webform-icon "></i>
                                                             <input
                                                                 class="crm-webform-input crm-webform-input-date crm-webform-input-desktop"
-                                                                onfocus="this.blur()" type="date"
+                                                                onfocus="this.blur()" type="text"
                                                                 formControlName="dateBorn"
                                                                 name="LEAD_UF_CRM_1580316545358"
-                                                                id="LEAD_UF_CRM_1580316545358" placeholder=""><input
-                                                                type="date"
+                                                                id="LEAD_UF_CRM_1580316545358" placeholder=""
+                                                                mask="00/00/0000"><input
+                                                                type="text"
                                                                 class="form-control crm-webform-input crm-webform-input-date crm-webform-input-mobile"
-                                                                id="LEAD_UF_CRM_1580316545358_mobile" placeholder=""> <b
+                                                                id="LEAD_UF_CRM_1580316545358_mobile" placeholder=""
+                                                                mask="00/00/0000"> <b
                                                                 *ngIf="f.dateBorn.errors?.required"
                                                                 class="tooltip crm-webform-tooltip-bottom-right">Preencher
                                                                 todos os campos obrigatórios</b>
@@ -225,11 +228,13 @@
                                                             <i class="crm-webform-icon "></i>
                                                             <input onfocus="this.blur()" formControlName="dateJobEnd"
                                                                 class="form-control crm-webform-input crm-webform-input-date crm-webform-input-desktop"
-                                                                type="date" name="LEAD_UF_CRM_1597497700"
-                                                                id="LEAD_UF_CRM_1597497700" placeholder=""><input
-                                                                type="date"
+                                                                type="text" name="LEAD_UF_CRM_1597497700"
+                                                                id="LEAD_UF_CRM_1597497700" placeholder=""
+                                                                mask="00/00/0000"><input
+                                                                type="text"
                                                                 class="crm-webform-input crm-webform-input-date crm-webform-input-mobile"
-                                                                id="LEAD_UF_CRM_1597497700_mobile" placeholder=""> <b
+                                                                id="LEAD_UF_CRM_1597497700_mobile" placeholder=""
+                                                                mask="00/00/0000"> <b
                                                                 *ngIf="f.dateJobEnd.errors?.required"
                                                                 class="tooltip crm-webform-tooltip-bottom-right">Preencher
                                                                 todos os campos obrigatórios</b>
