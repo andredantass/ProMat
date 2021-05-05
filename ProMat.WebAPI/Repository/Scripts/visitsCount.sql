@@ -1,0 +1,1 @@
+select count(id) as Visitas from Visits;

@@ -6,10 +6,10 @@ var txh1;
 function startInitial()
 {
 
-	if (urlData === '/question') {
+	if (urlData === '/') {
 		var h1	= document.querySelector('.copy h1'),
 		h2		= document.querySelector('.copy h2'),
-		txh1	= 'Você pode ganhar até  R$ 4.500,00.';
+		txh1	= 'Você pode ganhar até  R$ 5.556,00.';
 		txh2	= 'Responda a pergunta abaixo que te diremos se você tem direito ao benefício.';
 
 		tempo	= 1500;

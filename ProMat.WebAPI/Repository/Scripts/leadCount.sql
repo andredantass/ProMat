@@ -1,0 +1,1 @@
+SELECT count(distinct phone) as leadCount FROM Lead;

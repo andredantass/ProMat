@@ -1,7 +1,7 @@
 <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
-            <img class="landing-block-node-img img-fluid" src="../../assets/img/bannercentralmaternidade.jpg">
+            <img class="landing-block-node-img img-fluid" src="../../assets/img/bannerassessoriamaternidade.jpg">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -29,9 +29,7 @@
                                                         <label class="crm-webform-input-label">
                                                             <input name="firstName" formControlName="firstName"
                                                                 class="form-control crm-webform-input" type="text"
-                                                                placeholder=""> <b *ngIf="f.firstName.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+                                                                placeholder="">
                                                         </label>
                                                     </div>
                                                 </div>
@@ -60,11 +58,37 @@
                                                             <input value="" name="LEAD_PHONE" formControlName="phone"
                                                                 id="LEAD_PHONE"
                                                                 class="form-control crm-webform-input crm-webform-input-phone"
-                                                                type="number"
-                                                                placeholder="(XX) XXXXX-XXXX"> <b
-                                                                *ngIf="f.phone.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+                                                                type="tel" placeholder="(XX) XXXXX-XXXX"
+                                                                mask="(00) 00000-0000">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 crm-webform-field-email"
+                                                [ngClass]="{ 'crm-webform-error': submitted && f.email.errors }"
+                                                id="field_LEAD_EMAIL">
+
+                                                <div class="crm-webform-label-title-container">
+                                                    <div class="crm-webform-label-title">
+                                                        <label for="LEAD_EMAIL"
+                                                            class="crm-webform-label crm-webform-label-required-field">E-mail:</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="crm-webform-group" id="field_LEAD_EMAIL_CONT">
+                                                    <div class="crm-webform-label-content">
+                                                        <label class="crm-webform-input-label">
+                                                            <i class="crm-webform-icon fa fa-envelope"></i>
+                                                            <input name="LEAD_EMAIL" formControlName="email"
+                                                                id="LEAD_EMAIL"
+                                                                class="form-control crm-webform-input crm-webform-input-phone"
+                                                                type="email" placeholder="exemplo@email.com">
+                                                            <p *ngIf="f.email.errors?.email"
+                                                                class="dateError"> E-mail inválido!
+                                                            </p>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -79,8 +103,8 @@
                                                 <div class="crm-webform-label-title-container">
                                                     <div class="crm-webform-label-title">
                                                         <label for="LEAD_UF_CRM_1597496714"
-                                                            class="crm-webform-label crm-webform-label-required-field">Você
-                                                            está?:</label>
+                                                            class="crm-webform-label crm-webform-label-required-field">Qual
+                                                            sua situação?</label>
                                                     </div>
                                                 </div>
                                                 <div class="crm-webform-group" id="field_LEAD_UF_CRM_1597496714_CONT">
@@ -92,18 +116,53 @@
                                                                 name="LEAD_UF_CRM_1597496714"
                                                                 id="LEAD_UF_CRM_1597496714"
                                                                 (change)="ddlYouAreSelectedChangeHandler($event)">
-                                                                <option value=""></option>
-                                                                <option value="PregnantFirstChild">Gestante do
+                                                                <option value="Primeira gravidez">Gestante do
                                                                     PRIMEIRO(A) FILHO(A).
                                                                 </option>
-                                                                <option value="PregnantChildLessFiveYears">Gestante e
-                                                                    filho(a) MENOR de 5 anos.</option>
-                                                                <option value="PregnantChildMoreFiveYears">Gestante e
-                                                                    filho(a) com MAIS de 5 anos.</option>
+                                                                <option value="Grávida filho menor de 5">Estou gestante
+                                                                    e
+                                                                    tenho outro(a) filho(a) MENOR de 5 anos.</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
 
-                                                            </select> <b *ngIf="f.situation.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row" [hidden]="!childLessFive">
+                                            <div class="col-md-12 col-sm-12 crm-webform-field-date"
+                                                [ngClass]="{'crm-webform-error': submitted && f.dateBorn.errors}"
+                                                id="field_LEAD_UF_CRM_1580316545358">
+
+                                                <div class="crm-webform-label-title-container">
+                                                    <div class="crm-webform-label-title">
+                                                        <label for="LEAD_UF_CRM_1580316545358"
+                                                            class="crm-webform-label crm-webform-label-required-field">Qual
+                                                            a data (mês/ano) de nascimento do filho(a) mais novo(a) e COM MENOS de
+                                                            5 anos?:</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="crm-webform-group"
+                                                    id="field_LEAD_UF_CRM_1580316545358_CONT">
+                                                    <div class="crm-webform-label-content">
+                                                        <label class="crm-webform-input-label">
+                                                            <i class="crm-webform-icon fa fa-calendar"></i>
+                                                            <!-- <input (blur)="validateDateBorn()" [min]="datemin"
+                                                                [max]="datemax"
+                                                                class="crm-webform-input crm-webform-input-date crm-webform-input-desktop"
+                                                                type="date" formControlName="dateBorn"
+                                                                name="LEAD_UF_CRM_1580316545358"
+                                                                id="LEAD_UF_CRM_1580316545358" placeholder=""> -->
+                                                                <input type="text" class="crm-webform-input" mask="00/00"
+                                                                name="LEAD_UF_CRM_1580316545358" formControlName="dateBorn"
+                                                                id="LEAD_UF_CRM_1580316545358" placeholder="00/00">
+                                                                <p class="dateError" *ngIf="f.dateBorn.errors?.minlength && submitted"> Data incompleta!</p>
+                                                            <!-- <p class="dateError" *ngIf="!this.comparaMax"> Data Inválida!</p>
+                                                            <p class="dateError" *ngIf="!this.comparaMin"> Data Inválida!</p> -->
                                                         </label>
                                                     </div>
                                                 </div>
@@ -116,43 +175,33 @@
 
                                         <div class="row" [hidden]="!workRegistered">
                                             <div class="col-md-12 col-sm-12 crm-webform-field-date"
-                                                [ngClass]="{'crm-webform-error': submitted && f.dateBorn.errors}"
-                                                id="field_LEAD_UF_CRM_1580316545358">
+                                                [ngClass]="{ 'crm-webform-error': submitted && f.dateWillBorn.errors }"
+                                                id="field_LEAD_UF_CRM_1597497700">
 
                                                 <div class="crm-webform-label-title-container">
                                                     <div class="crm-webform-label-title">
-                                                        <label for="LEAD_UF_CRM_1580316545358"
+                                                        <label for="LEAD_UF_CRM_1597497700"
                                                             class="crm-webform-label crm-webform-label-required-field">Qual
-                                                            é a previsão para o parto ?:</label>
+                                                        a data (mês/ano) prevista para o parto?</label>
                                                     </div>
                                                 </div>
 
-
-
-                                                <div class="crm-webform-group"
-                                                    id="field_LEAD_UF_CRM_1580316545358_CONT">
+                                                <div class="crm-webform-group" id="field_LEAD_UF_CRM_1597497700_CONT">
                                                     <div class="crm-webform-label-content">
                                                         <label class="crm-webform-input-label">
-                                                            <i class="crm-webform-icon "></i>
-                                                            <input
-                                                                class="crm-webform-input crm-webform-input-date crm-webform-input-desktop"
-                                                                onfocus="this.blur()" type="date"
-                                                                formControlName="dateBorn"
-                                                                name="LEAD_UF_CRM_1580316545358"
-                                                                id="LEAD_UF_CRM_1580316545358" placeholder=""><input
-                                                                type="date"
-                                                                class="form-control crm-webform-input crm-webform-input-date crm-webform-input-mobile"
-                                                                id="LEAD_UF_CRM_1580316545358_mobile" placeholder=""> <b
-                                                                *ngIf="f.dateBorn.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
-
+                                                            <i class="crm-webform-icon fa fa-calendar"></i>
+                                                            <!-- <input (blur)="validateDateJob()" formControlName="dateJobEnd" [max]="today"
+                                                                class="form-control crm-webform-input crm-webform-input-date crm-webform-input-desktop"
+                                                                type="date" name="LEAD_UF_CRM_1597497700"
+                                                                id="LEAD_UF_CRM_1597497700" placeholder=""> -->
+                                                                <input type="text" class="crm-webform-input" mask="00/00"
+                                                                name="LEAD_UF_CRM_1597497700" formControlName="dateWillBorn"
+                                                                id="LEAD_UF_CRM_1597497700" placeholder="00/00">
+                                                                <p class="dateError" *ngIf="f.dateWillBorn.errors?.minlength && submitted"> Data incompleta!</p>
+                                                            <!-- <p class="dateError" *ngIf="!this.comparaMaxJob"></p> -->
                                                         </label>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                         </div>
 
@@ -164,8 +213,8 @@
                                                 <div class="crm-webform-label-title-container">
                                                     <div class="crm-webform-label-title">
                                                         <label for="LEAD_UF_CRM_1597497342"
-                                                            class="crm-webform-label crm-webform-label-required-field">Trabalha
-                                                            registrada ou paga carnê da previdência?:</label>
+                                                            class="crm-webform-label crm-webform-label-required-field">Como
+                                                        você está/estava profissionalmente?</label>
                                                     </div>
                                                 </div>
 
@@ -179,28 +228,52 @@
                                                                 name="LEAD_UF_CRM_1597497342"
                                                                 formControlName="prevSituation" id="ddlYouWorked"
                                                                 (change)="ddlHasYouWorkedSelectedChangeHandler($event)">
-                                                                <option value="">Não selecionado</option>
-                                                              <!--   <option value="WorkRegisteredBeforeBorn">TRABALHO
+                                                                <!--   <option value="WorkRegisteredBeforeBorn">TRABALHO
                                                                     REGISTRADA.</option> -->
-                                                                <option value="WasFired">TRABALHEI
+                                                                <option value="Trabalhei Registrada">TRABALHEI
                                                                     REGISTRADA antes de nascer.</option>
-                                                                <option value="ImMEI">Sou MEI (Micro Empreendedor
+                                                                <option value="Sou MEI">Sou MEI (Micro Empreendedor
                                                                     Individual).</option>
-                                                                <option value="PayedFormByMyOn">Pago a previdência por
+                                                                <option value="Paguei por conta">Pago a previdência por
                                                                     conta (carnê GPS).</option>
-                                                                <option value="NoWorkedRegisteredBeforeBorn">NÃO
-                                                                    trabalhei registrada antes de nascer.</option>
-                                                                <option value="NeverWorked">Nunca trabalhei registrada.
-                                                                </option>
-                                                            </select> <b *ngIf="f.prevSituation.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+                                                                <option value="Não trabalhei registrada">NÃO
+                                                                    trabalhei registrada.</option>
+                                                            </select>
                                                         </label>
                                                     </div>
                                                 </div>
 
+                                                <!-- <div class="row" [hidden]="!meiPagou">
+                                                    <div class="col-md-12 col-sm-12 crm-webform-field-list "
+                                                        [ngClass]="{'crm-webform-error': submitted && f.paidTen.errors}"
+                                                        id="field_LEAD_UF_CRM_1597497342">
 
+                                                        <div class="crm-webform-label-title-container">
+                                                            <div class="crm-webform-label-title">
+                                                                <label for="LEAD_UF_CRM_1597497342"
+                                                                    class="crm-webform-label crm-webform-label-required-field">Você
+                                                                    pagou ou terá pago até o nascimento do bebê
+                                                                    ao menos 10 guias de contribuição do INSS?
+                                                                </label>
+                                                            </div>
+                                                        </div>
 
+                                                        <div class="crm-webform-group"
+                                                            id="field_LEAD_UF_CRM_1597497342_CONT">
+                                                            <div class="crm-webform-label-content">
+                                                                <label class="crm-webform-input-label">
+                                                                    <i class="crm-webform-icon fa fa-arrow-down"></i>
+                                                                    <select class="form-control crm-webform-input"
+                                                                        name="LEAD_UF_CRM_1597497342"
+                                                                        formControlName="paidTen" id="paidTen">
+                                                                        <option value="Sim">Sim, paguei.</option>
+                                                                        <option value="Não">Não paguei.</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
                                             </div>
                                         </div>
 
@@ -213,32 +286,26 @@
                                                     <div class="crm-webform-label-title">
                                                         <label for="LEAD_UF_CRM_1597497700"
                                                             class="crm-webform-label crm-webform-label-required-field">Qual
-                                                            foi a data da saída do emprego?:</label>
+                                                            foi a data (mês/ano) da saída do emprego?:</label>
                                                     </div>
                                                 </div>
-
-
 
                                                 <div class="crm-webform-group" id="field_LEAD_UF_CRM_1597497700_CONT">
                                                     <div class="crm-webform-label-content">
                                                         <label class="crm-webform-input-label">
-                                                            <i class="crm-webform-icon "></i>
-                                                            <input onfocus="this.blur()" formControlName="dateJobEnd"
+                                                            <i class="crm-webform-icon fa fa-calendar"></i>
+                                                            <!-- <input (blur)="validateDateJob()" formControlName="dateJobEnd" [max]="today"
                                                                 class="form-control crm-webform-input crm-webform-input-date crm-webform-input-desktop"
                                                                 type="date" name="LEAD_UF_CRM_1597497700"
-                                                                id="LEAD_UF_CRM_1597497700" placeholder=""><input
-                                                                type="date"
-                                                                class="crm-webform-input crm-webform-input-date crm-webform-input-mobile"
-                                                                id="LEAD_UF_CRM_1597497700_mobile" placeholder=""> <b
-                                                                *ngIf="f.dateJobEnd.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+                                                                id="LEAD_UF_CRM_1597497700" placeholder=""> -->
+                                                                <input type="text" class="crm-webform-input" mask="00/00"
+                                                                name="LEAD_UF_CRM_1597497700" formControlName="dateJobEnd"
+                                                                id="LEAD_UF_CRM_1597497700" placeholder="00/00">
+                                                                <p class="dateError" *ngIf="f.dateJobEnd.errors?.minlength && submitted"> Data incompleta!</p>
+                                                            <!-- <p class="dateError" *ngIf="!this.comparaMaxJob"></p> -->
                                                         </label>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                         </div>
 
@@ -265,14 +332,11 @@
                                                                 name="LEAD_UF_CRM_1597497546"
                                                                 formControlName="segJobReceive"
                                                                 id="LEAD_UF_CRM_1597497546">
-                                                                <option value="">Não selecionado</option>
-                                                                <option value="Yes">SIM, RECEBI seguro desemprego.
+                                                                <option value="Sim">SIM, RECEBI seguro desemprego.
                                                                 </option>
-                                                                <option value="No">NÃO recebi seguro desemprego.
+                                                                <option value="Não">NÃO recebi seguro desemprego.
                                                                 </option>
-                                                            </select> <b *ngIf="f.segJobReceive.errors?.required"
-                                                                class="tooltip crm-webform-tooltip-bottom-right">Preencher
-                                                                todos os campos obrigatórios</b>
+                                                            </select>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -287,6 +351,16 @@
 
 
                                     <fieldset class="crm-webform-fieldset-footer">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 text-center">
+                                                <p style="background-color: lightcoral; border-radius: 2px;">
+                                                    <strong>Por favor revise suas respostas antes do envio. <br>
+                                                        Informações incorretas podem te desqualificar na análise!
+                                                    </strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 text-center">
 
@@ -311,7 +385,7 @@
     </div>
 </div>
 
-<div class="overlay"  [hidden]="IsWait">
+<div class="overlay" [hidden]="IsWait">
     <div class="center">
         <mat-progress-spinner diameter=100 mode="indeterminate" color="accent">
         </mat-progress-spinner>

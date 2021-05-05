@@ -9,8 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThankyouPageComponent } from './thankyou-page/thankyou-page.component';
 
 const routes: Routes = [
-  {path: '**', redirectTo: '/question'},
-  { path: 'index', component: FormsComponent },
+  { path: '', component: FormsComponent },
   { path: 'question', component: QuestionFormComponent },
   { path: 'thankyou', component: DashboardComponent },
   { path: 'qualificationnoborn', component: QualificationFormNobornComponent },

@@ -1466,6 +1466,14 @@ a.crm-webform-bottom-link:focus {
     box-sizing: border-box
 }
 
+.dateError {
+    background-color: #ffb8b8; 
+    font-family:'Courier New', Courier, monospace; 
+    color: #d10000; 
+    border: solid 1px #f11a48; 
+    border-radius: 2px;
+}
+
 @media(max-width:420px) {
     .crm-webform-captcha {
         display: -webkit-box;

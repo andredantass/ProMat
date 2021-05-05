@@ -1,4 +1,3 @@
-
 <main>
   <section>
     <div class="mymodal">
@@ -16,13 +15,13 @@
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i class="far fa-check-circle"></i>Seu filho já Nasceu?</h4>
+                <h4> <i class="far fa-check-circle"></i>Seu filho já Nasceu?</h4>  
               </div>
             </div>
             <div class="content">
               <div> 
-                <button [routerLink]="'/qualificationborn'">Sim</button>
-                <button [routerLink]="'/qualificationnoborn'">Não</button>
+                <button (click)="countAccessYes()" [routerLink]="'/qualificationborn'">Sim</button>
+                <button (click)="countAccessNo()" [routerLink]="'/qualificationnoborn'">Não</button>
               </div>
             </div>
           </div>

@@ -295,7 +295,7 @@ namespace ProMat.WebAPI.Service
                         }
                     };
 
-                    PostToAPI(url, "", data);
+                   // PostToAPI(url, "", data);
                     if (!reprocess)
                         qualifiedLeadService.InsertQualifiedLead(qualifiedLead);
                 }

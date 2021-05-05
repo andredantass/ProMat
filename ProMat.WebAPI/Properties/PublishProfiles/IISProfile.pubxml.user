@@ -6,6 +6,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAL5BZj19LEkaj4y3O2u/C8AAAAAACAAAAAAAQZgAAAAEAACAAAABFj4nmACbftWCC9KFzk2J4CjonM3xIQ+QnQ1VddcDoMgAAAAAOgAAAAAIAACAAAABSxwUI1u022lVmVVYUR1HEJuQ4MqFBHYQWdl4rk77VmCAAAACT/OFdcY1HPgS1TcDjppccbIQSDg9zXctDMS1+VRO2+kAAAADrQXGNLwWIcfjh3hFqb4g1vhuzSRJSFUBLKBvYwPUWC1OevNNrZHBQ8fqt/sWmlsHaWUF77zTpXh1Lffen1XpV</EncryptedPassword>
+    <_PublishTargetUrl>C:\Users\escritorio\Desktop\APIProMat</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

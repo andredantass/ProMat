@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThankyouPageComponent } from './thankyou-page/thankyou-page.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -35,10 +36,12 @@ import { ThankyouPageComponent } from './thankyou-page/thankyou-page.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [FormService],
   exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;

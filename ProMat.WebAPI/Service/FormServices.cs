@@ -1,4 +1,5 @@
 ﻿using ProMat.WebAPI.Model;
+using ProMat.WebAPI.Repository;
 using ProMat.WebAPI.Utility;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,6 @@ namespace ProMat.WebAPI.Service
     {
         int qualified = 0;
         Bitrix24Services btnService = new Bitrix24Services();
-
-
 
         public List<string> GetNextUserDepartmentLeadQualifield()
         {
@@ -135,6 +134,106 @@ namespace ProMat.WebAPI.Service
 
             return false;
 
+        }
+        public Lead ReturnLead(FullForm form)
+        {
+            LeadServices leadServices = new LeadServices();
+            var lead = new Lead()
+            {
+                LeadStatusId = 1,
+                Name = form.Name,
+                Email = form.Email,
+                Phone = form.Phone,
+                Date = DateTime.Now.AddHours(4)
+            };
+            //Se 0, o lead ainda não existe na base
+            if (leadServices.VerifyLead(lead) == 0)
+            {
+                leadServices.InsertLead(lead);
+            }
+            return lead;
+        }
+        public FormAnswer ReturnFormAnswer (FullForm form, Lead lead)
+        {
+            LeadServices leadServices = new LeadServices();
+            if (leadServices.VerifyLead(lead) == 0)
+            {
+                var formAnswer = new FormAnswer()
+                {
+                    LeadId = lead.Id,
+                    Situation = form.Situation,
+                    DateBorn = form.DateBorn,
+                    DateWillBorn = form.DateWillBorn,
+                    WorkRegistered = form.PrevSituation,
+                    DateJobEnd = form.DateJobEnd,
+                    SegJobReceive = form.SegJobReceive,
+                    Contributed = form.PaidTen,
+                    InsertDate = DateTime.Now.AddHours(4)
+                };
+                return formAnswer;
+            }
+            else
+            {
+                var formAnswer = new FormAnswer()
+                {
+                    LeadId = leadServices.VerifyLead(lead),
+                    Situation = form.Situation,
+                    DateBorn = form.DateBorn,
+                    DateWillBorn = form.DateWillBorn,
+                    WorkRegistered = form.PrevSituation,
+                    DateJobEnd = form.DateJobEnd,
+                    SegJobReceive = form.SegJobReceive,
+                    Contributed = form.PaidTen,
+                    InsertDate = DateTime.Now.AddHours(4)
+                };
+                return formAnswer;
+            }
+        }
+        public void VerifyQualifiedBorn(FormAnswer formAnswer)
+        {
+            FormAnswersServices formAnswersServices = new FormAnswersServices();
+            if (formAnswer.Situation == "Mãe de filho menor de 5 Anos")
+            {
+                if(formAnswer.WorkRegistered == "Trabalhei Registrada")
+                {
+                    formAnswer.Qualified = true;
+                }
+                else
+                {
+                    if (formAnswer.Contributed == "Contribuí Individualmente")
+                    {
+                        formAnswer.Qualified = true;
+                    }
+                    else
+                    {
+                        formAnswer.Qualified = false;
+                    }
+                }
+            }
+            else
+            {
+                formAnswer.Qualified = false;
+            }
+            formAnswersServices.InsertAnswers(formAnswer);
+        }
+        public void VerifyQualifiedNoBorn(FormAnswer formAnswer)
+        {
+            FormAnswersServices formAnswersServices = new FormAnswersServices();
+            if (formAnswer.WorkRegistered == "Não trabalhei registrada")
+            {
+                formAnswer.Qualified = false;
+            }
+            else
+            {
+                formAnswer.Qualified = true;
+                if (formAnswer.WorkRegistered == "Trabalhei Registrada")
+                {
+                    formAnswer.Contributed = "";
+                }
+                else
+                    formAnswer.Contributed = "Contribuí Indivualmente";
+            }
+            formAnswersServices.InsertAnswers(formAnswer);
         }
         public bool CheckQualifieBornQuestionForm(QualifiedLead form)
         {

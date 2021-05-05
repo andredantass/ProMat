@@ -1,2 +1,110 @@
-<!-- Event snippet for Preencheu e Enviou o form. Virou Lead no Bitrix - Sistema Qualificador conversion page -->
-<script> gtag('event', 'conversion', { 'send_to': 'AW-537231662/1l8VCPbj9eoBEK6CloAC' }); </script>
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="crm-webform-block crm-webform-default">
+                            <div class="crm-webform-body">
+                                <form novalidate="" [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+                                    class="crm-webform-form-container" id="bxform" method="POST"
+                                    enctype="multipart/form-data">
+                                    <fieldset class="crm-webform-fieldset">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 crm-webform-field-string ">
+
+                                                <div class="crm-webform-label-title-container">
+                                                    <div class="crm-webform-label-title">
+                                                        <h3 style="text-align: center;"><strong>Obrigado por suas respostas!</strong></h3>
+                                                        <br>
+                                                        <label for="LEAD_NAME" style="text-align: center;"
+                                                            class="crm-webform-label">
+                                                            <strong style="color: red">Infelizmente você não se enquadra dentro do perfil de
+                                                            segurada, não conseguiremos lhe ajudar com a liberação do
+                                                            beneficio.</strong> <br><br> 
+                                                            Porém, temos uma oportunidade para que consiga
+                                                            ganhar um bônus com nossa assessoria.
+                                                            Caso tenha alguma <strong>amiga, parente ou conhecida</strong> que esteja
+                                                            desempregada e se enquadre dentro das regras exigidas pelo
+                                                            órgão competente, nos indique!
+                                                            <br><br>
+                                                            Se <strong>ela</strong> fechar com nossa assessoria, conseguimos lhe pagar
+                                                            R$50,00 assim que o benefício <strong>dela</strong> for liberado.
+                                                            Para indicar alguma mãe, por favor preencha o Nome da Pessoa
+                                                            e o número do Whatsapp.
+                                                        </label>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 crm-webform-field-string "
+                                                        id="field_LEAD_NAME" [ngClass]="{'crm-webform-error': submitted && this.registerForm.invalid}">
+        
+                                                        <div class="crm-webform-label-title-container">
+                                                            <div class="crm-webform-label-title">
+                                                                <label for="LEAD_NAME"
+                                                                    class="crm-webform-label crm-webform-label-required-field">Nome
+                                                                    completo:</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="crm-webform-group" id="field_LEAD_NAME_CONT">
+                                                            <div class="crm-webform-label-content">
+                                                                <label class="crm-webform-input-label">
+                                                                    <input name="firstName" formControlName="firstName"
+                                                                        class="form-control crm-webform-input" type="text"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 crm-webform-field-phone"
+                                                        id="field_LEAD_PHONE" [ngClass]="{'crm-webform-error': submitted && this.registerForm.invalid}">
+        
+                                                        <div class="crm-webform-label-title-container">
+                                                            <div class="crm-webform-label-title">
+                                                                <label for="LEAD_PHONE"
+                                                                    class="crm-webform-label crm-webform-label-required-field">Whatsapp:</label>
+                                                            </div>
+                                                        </div>
+        
+                                                        <div class="crm-webform-group" id="field_LEAD_PHONE_CONT">
+                                                            <div class="crm-webform-label-content">
+                                                                <label class="crm-webform-input-label">
+                                                                    <i class="crm-webform-icon fa fa-phone"></i>
+                                                                    <input name="LEAD_PHONE" formControlName="phone"
+                                                                        id="LEAD_PHONE"
+                                                                        class="form-control crm-webform-input crm-webform-input-phone"
+                                                                        type="tel" placeholder="(XX) XXXXX-XXXX"
+                                                                        mask="(00) 00000-0000">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <fieldset class="crm-webform-fieldset-footer">
+                                                            <div class="row">
+                                                                <div class="col-md-12 col-sm-12 text-center">
+                    
+                                                                    <button tooltip="Enviar" placement="top"
+                                                                        class="btn btn-lg btn-primary rounded">
+                                                                        Enviar</button>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

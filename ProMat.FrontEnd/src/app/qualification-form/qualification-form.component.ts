@@ -105,14 +105,14 @@ export class QualificationFormComponent implements OnInit {
       return;
     }
 
-    this.qualifiedForm.FirstName = this.registerForm.get('firstName').value;
+    this.qualifiedForm.Name = this.registerForm.get('firstName').value;
     this.qualifiedForm.Phone = this.registerForm.get('phone').value.tostring();
     this.qualifiedForm.Situation = this.registerForm.get('situation').value;
     this.qualifiedForm.PrevSituation = this.registerForm.get('prevSituation').value;
     this.qualifiedForm.DateBorn = this.registerForm.get('dateBorn').value;
     this.qualifiedForm.DateJobEnd = this.registerForm.get('dateJobEnd').value;
 
-    this.formService.validateBornForm(this.qualifiedForm).subscribe(
+    /* this.formService.validateBornForm(this.qualifiedForm).subscribe(
       response => {
         //Swal.fire('Success', 'Password was changed successfully.', 'success');
 
@@ -121,7 +121,7 @@ export class QualificationFormComponent implements OnInit {
         console.log(error);
         //Swal.fire('Error to change Password', error, 'error');
       }
-    );
+    ); */
 
 
 

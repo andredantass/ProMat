@@ -1,11 +1,14 @@
 export class QualifiedQueue
 {
     QualifiedQueueId: number;
-    FirstName: string;
+    Name: string;
+    Email: string;
     Phone: string;
     Situation: string;
-    DateBorn: Date ;
+    DateBorn: string;
+    DateWillBorn: string;
     PrevSituation: string;
-    DateJobEnd: Date ;
+    DateJobEnd: string;
     SegJobReceive: string;
+    PaidTen: string;
 }

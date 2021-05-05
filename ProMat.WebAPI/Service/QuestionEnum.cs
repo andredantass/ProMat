@@ -8,15 +8,15 @@ namespace ProMat.WebAPI.Service
 {
     public enum YouAre
     {
-        [Description("Gestante do PRIMEIRO(A) FILHO(A).")]
+        [Description("Primeira gravidez")]
         PregnantFirstChild,
-        [Description("Gestante e filho(a) MENOR de 5 anos.")]
+        [Description("Grávida filho menor de 5")]
         PregnantChildLessFiveYears,
         [Description("Gestante e filho(a) com MAIS de 5 anos.")]
         PregnantChildMoreFiveYears,
-        [Description("Mãe de filho(a) MENOR de 5 anos.")]
+        [Description("Mãe de filho menor de 5 Anos")]
         MotherChildLessFiveYears,
-        [Description("Mãe de filho(a) com MAIS de 5 anos.")]
+        [Description("Mãe de filho maior de 5 Anos")]
         MotherChildMoreFiveYears,
         Empty
 

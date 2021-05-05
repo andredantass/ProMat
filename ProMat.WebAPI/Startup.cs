@@ -33,21 +33,20 @@ namespace ProMat.WebAPI
             services.AddCors(options =>
             {
 
-                //options.AddPolicy("AllowAllDEV", builder =>
+                options.AddPolicy("AllowAllDEV", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200/")
+                   .AllowAnyHeader()
+                   .WithMethods("GET", "POST")
+                   .AllowCredentials();
+                });
+                //options.AddPolicy("AllowAllProd", builder =>
                 //{
-                //    builder.WithOrigins("http://localhost:4200/")
-                //   .AllowAnyHeader()
-                //   .WithMethods("GET", "POST")
-                //   .AllowCredentials();
+                //    builder.WithOrigins("https://formulario.assessoriamaternidade.com.br/")
+                //      .AllowAnyHeader()
+                //      .WithMethods("GET", "POST")
+                //      .AllowCredentials();
                 //});
-
-                options.AddPolicy("AllowAllProd", builder =>
-                 {
-                     builder.WithOrigins("http://auxilio.luxassessoriajuridica.com.br/")
-                       .AllowAnyHeader()
-                       .WithMethods("GET", "POST")
-                        .AllowCredentials();
-                 });
             });
         }
 

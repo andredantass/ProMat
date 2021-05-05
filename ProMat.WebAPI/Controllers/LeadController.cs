@@ -111,6 +111,24 @@ namespace ProMat.WebAPI.Controllers
             return response;
         }
         [HttpGet]
+        [Route("GetLeadList")]
+        public ResponseDTO GetLeadList()
+        {
+            LeadServices leadServices = new LeadServices();
+            var response = new ResponseDTO();
+            var leads = new List<List<string>>();
+            try
+            {
+                response.Data = new { Leads = leads };
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        [HttpGet]
         [Route("RemoveDisQualifiedLeads")]
         public ResponseDTO RemoveDisQualifiedLeads()
         {

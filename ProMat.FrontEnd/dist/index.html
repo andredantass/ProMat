@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ProMatApp</title>
+  <title>Formulário Assessoria Maternidade</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
   <link rel="stylesheet" href="assets/css/home-style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
@@ -22,23 +22,32 @@
   <link href="assets/vendor/select2/select2.min.css" rel="stylesheet" media="all">
   <link href="assets/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
-
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180913957-1"></script>
+  <!-- Global site tag (gtag.js) - Google Ads: 455404373 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-455404373"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    gtag('config', 'UA-180913957-1');
-    gtag('config', 'AW-537231662');
+    gtag('config', 'AW-455404373');
   </script>
-  <!-- Global site tag (gtag.js) - Google Ads: 537231662 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-537231662"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-537231662'); 
+  <!-- Event snippet for Clique no Botão do Whatsapp Assessoria conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof (url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        'send_to': 'AW-455404373/d2BbCJrg9IkCENXWk9kB',
+        'event_callback': callback
+      });
+      return false;
+    }
   </script>
-<link rel="stylesheet" href="styles.15340bc6d2c7c6164a0a.css"></head>
+<link rel="stylesheet" href="styles.34cbac3b6903a28e6cb8.css"></head>
 
 <body>
   <app-root></app-root>
@@ -54,6 +63,6 @@
   <script src="assets/js/global.js"></script>
   <script type="text/javascript" src="assets/js/home-functions.js"></script>
   <!-- <script type="text/javascript" src="assets/js/steps.js"></script> -->
-<script src="runtime.acf0dec4155e77772545.js" defer></script><script src="polyfills.35a5ca1855eb057f016a.js" defer></script><script src="scripts.3466130a99b63497bd13.js" defer></script><script src="main.6e000abcf20d251fe5b4.js" defer></script></body>
+<script src="runtime.acf0dec4155e77772545.js" defer></script><script src="polyfills.35a5ca1855eb057f016a.js" defer></script><script src="scripts.945583f9624e00f78a4d.js" defer></script><script src="main.4968fa23b4f3453c3095.js" defer></script></body>
 
 </html>

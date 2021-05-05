@@ -20,6 +20,9 @@ namespace ProMat.WebAPI.Data
         public DbSet<Attendant> Attendants { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Webhook> Webhook { get; set; }
+        public DbSet<Lead> Lead { get; set; }
+        public DbSet<FormAnswer> FormAnswers { get; set; }
+        public DbSet<Control> Visits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>3df38fff-fa4b-4261-a1cf-20b6c5363512</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +40,21 @@
    <None Update="google-credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+   <None Update="Repository\Scripts\disqualifiedCount.sql">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Repository\Scripts\leadCount.sql">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Repository\Scripts\leadList.sql">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Repository\Scripts\qualifiedCount.sql">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="Repository\Scripts\visitsCount.sql">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\img\" />
