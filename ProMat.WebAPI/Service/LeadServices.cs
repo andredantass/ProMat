@@ -28,9 +28,10 @@ namespace ProMat.WebAPI.Service
             int leadId = _leadRepository.VerifyLead(model);
             return leadId;
         }
-        public List<List<string>> LeadList()
+        public List<Lead> LeadList()
         {
-            List<List<string>> leads = _leadRepository.
+            List<Lead> leads = _leadRepository.LeadList();
+            return leads;
         }
 
     }

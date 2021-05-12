@@ -8,6 +8,7 @@ export class QualifiedQueue
     DateBorn: string;
     DateWillBorn: string;
     PrevSituation: string;
+    WorkOnBirth: string;
     DateJobEnd: string;
     SegJobReceive: string;
     PaidTen: string;

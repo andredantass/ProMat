@@ -124,13 +124,13 @@ namespace ProMat.WebAPI.Service
             else if ((youAreObj == YouAre.PregnantFirstChild ||
                 youAreObj == YouAre.PregnantChildLessFiveYears ||
                 youAreObj == YouAre.PregnantChildMoreFiveYears) && hasYouWorkObj == HasYouWorked.WasFired)
-            {
-                if (receivedWorkInsurancesObj == ReceivedWorkInsurances.No || receivedWorkInsurancesObj == ReceivedWorkInsurances.Yes)
                 {
-                    return true;
-                }
+                    if (receivedWorkInsurancesObj == ReceivedWorkInsurances.No || receivedWorkInsurancesObj == ReceivedWorkInsurances.Yes)
+                    {
+                        return true;
+                    }
 
-            }
+                 }
 
             return false;
 
@@ -141,7 +141,7 @@ namespace ProMat.WebAPI.Service
             var lead = new Lead()
             {
                 LeadStatusId = 1,
-                Name = form.Name,
+                Name = form.Name.Trim().ToUpper(),
                 Email = form.Email,
                 Phone = form.Phone,
                 Date = DateTime.Now.AddHours(4)
@@ -168,6 +168,7 @@ namespace ProMat.WebAPI.Service
                     DateJobEnd = form.DateJobEnd,
                     SegJobReceive = form.SegJobReceive,
                     Contributed = form.PaidTen,
+                    UnemployedBornDate = form.WorkOnBirth,
                     InsertDate = DateTime.Now.AddHours(4)
                 };
                 return formAnswer;
@@ -184,6 +185,7 @@ namespace ProMat.WebAPI.Service
                     DateJobEnd = form.DateJobEnd,
                     SegJobReceive = form.SegJobReceive,
                     Contributed = form.PaidTen,
+                    UnemployedBornDate = form.WorkOnBirth,
                     InsertDate = DateTime.Now.AddHours(4)
                 };
                 return formAnswer;
@@ -196,7 +198,10 @@ namespace ProMat.WebAPI.Service
             {
                 if(formAnswer.WorkRegistered == "Trabalhei Registrada")
                 {
-                    formAnswer.Qualified = true;
+                    if (formAnswer.UnemployedBornDate == "Sim")
+                        formAnswer.Qualified = true;
+                    else
+                        formAnswer.Qualified = false;
                 }
                 else
                 {

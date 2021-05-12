@@ -19,12 +19,12 @@
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i class="far fa-check-circle"></i>Seu filho já Nasceu?</h4>  
+                <h4> <i class="far fa-check-circle"></i>Seu filho já Nasceu?</h4>
               </div>
             </div>
             <div class="content">
-              <div> 
-                <button (click)="answerChildWasBorn()" >Sim</button>
+              <div>
+                <button (click)="answerChildWasBorn()">Sim</button>
                 <button (click)="countAccessNo()" [routerLink]="'/qualificationnoborn'">Não</button>
               </div>
             </div>
@@ -35,63 +35,95 @@
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i class="far fa-check-circle"></i>Seu filho tem menos de 5 anos de idade?</h4>  
+                <h4> <i class="far fa-check-circle"></i>Seu filho tem menos de 5 anos de idade?</h4>
               </div>
             </div>
             <div class="content">
-              <div> 
+              <div>
                 <button (click)="answerChildLess5Years(1)">Sim</button>
                 <button (click)="answerChildLess5Years(0)">Não</button>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
         <div class="box-huge1 animacao" #dvQuestionWorkBeforeBorn id="dvQuestionWorkBeforeBorn">
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i class="far fa-check-circle"></i>Trabalhou de carteira assinada <strong style="color: red;">antes </strong>do seu filho nascer ?</h4>  
+                <h4> <i class="far fa-check-circle"></i>Trabalhou de carteira assinada <strong style="color: red;">antes
+                  </strong>do seu filho nascer ?</h4>
               </div>
             </div>
             <div class="content">
-              <div> 
-                <button (click)="answerWorkBeforeBorn()">Sim</button>
-                <button >Não</button>
+              <div>
+                <button (click)="answerWorkBeforeBorn(1)">Sim</button>
+                <button (click)="answerWorkBeforeBorn(0)">Não</button>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
+        <div class="box-huge1 animacao" #dvQuestionWorkOnBirth id="dvQuestionInsurances">
+          <div class="info">
+            <div class="content">
+              <div>
+                <h4> <i class="far fa-check-circle"></i>Estava desempregada na data do parto ?</h4>
+              </div>
+            </div>
+            <div class="content">
+              <div>
+                <button (click)="answerWorkOnBirth(1)">Sim</button>
+                <button (click)="answerWorkOnBirth(0)">Não</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-huge1 animacao" #dvQuestionContributed id="dvQuestionContributed">
+          <div class="info">
+            <div class="content">
+              <div>
+                <h4> <i class="far fa-check-circle"></i>É MEI ou contribuiu com o INSS por conta(Carnê GPS)?</h4>
+              </div>
+            </div>
+            <div class="content">
+              <div>
+                <button (click)="answerContributed(1)">Sim</button>
+                <button (click)="answerContributed(0)">Não</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="box-huge1 animacao" #dvQuestionInsurances id="dvQuestionInsurances">
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i class="far fa-check-circle"></i>Recebeu o seguro desemprego ao sair desta empresa ?</h4>  
+                <h4> <i class="far fa-check-circle"></i>Recebeu o seguro desemprego ao sair desta empresa ?</h4>
               </div>
             </div>
             <div class="content">
-              <div> 
+              <div>
                 <button (click)="answerWorkInsurances(1)">Sim</button>
                 <button (click)="answerWorkInsurances(0)">Não</button>
               </div>
             </div>
           </div>
-        </div> 
-        <div class="box-huge2 animacao"  #dvCongratulation id="dvCongratulation">
+        </div>
+        <div class="box-huge1 animacao" #dvCongratulation id="dvCongratulation">
           <div class="info">
             <div class="content">
               <div>
-                <h4> <i style="color:green" class="far fa-check-circle"></i> <span style="color: green; font-weight: bold;">PARABÉNS </span>, você está Pré aprovada! Clique no botão abaixo e fale com um membro de nossa equipe.</h4>  
+                <h5> <i style="color:green" class="far fa-check-circle"> </i>
+                  <span style="color: green; font-weight: bold;">PARABÉNS </span>,
+                  você está Pré aprovada! Clique no botão abaixo para continuar.
+                </h5> 
               </div>
             </div>
             <div class="content">
-              <div> 
-               
+              <div>
                 <div class="btn btn-lg btn-primary rounded" (click)="sendToComercial()">ENVIAR RESPOSTAS</div>
-          
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   </section>

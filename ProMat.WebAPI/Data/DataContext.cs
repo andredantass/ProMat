@@ -23,6 +23,7 @@ namespace ProMat.WebAPI.Data
         public DbSet<Lead> Lead { get; set; }
         public DbSet<FormAnswer> FormAnswers { get; set; }
         public DbSet<Control> Visits { get; set; }
+        public DbSet<LeadStatus> LeadStatus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

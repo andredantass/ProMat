@@ -11,6 +11,7 @@ namespace ProMat.WebAPI.Model
         public string Situation { get; set; }
         public string DateBorn { get; set; }
         public string DateWillBorn { get; set; }
+        public string WorkOnBirth { get; set; }
         public string PrevSituation { get; set; }
         public string DateJobEnd { get; set; }
         public string SegJobReceive { get; set; }

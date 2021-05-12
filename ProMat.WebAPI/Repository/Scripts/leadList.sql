@@ -1,1 +1,1 @@
-select * from Leads;
+select * from Lead;

@@ -92,14 +92,10 @@ function startInitial()
 		}
 	}
 	setTimeout(() => {
-		document.querySelector('.mymodal .box').style.display = 'block';
+		document.getElementById('devQuestionChildWasBorn').style.display = 'block';
 	}, tempo)
 }
 
-function teste()
-{
-	alert('passou');
-}
 (function ($) {
     'use strict';
     /*==================================================================

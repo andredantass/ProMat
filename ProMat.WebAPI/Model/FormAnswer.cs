@@ -18,6 +18,7 @@ namespace ProMat.WebAPI.Model
         public string DateJobEnd { get; set; }
         public string SegJobReceive { get; set; }
         public string Contributed { get; set; }
+        public string UnemployedBornDate { get; set; }
         public bool Qualified { get; set; }
         public DateTime InsertDate { get; set; }
     }

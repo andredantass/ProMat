@@ -32,7 +32,7 @@ namespace ProMat.WebAPI.Repository
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
                 int leadId;
-                command.CommandText = "SELECT count(distinct id), id FROM Lead WHERE phone = " + model.Phone;
+                command.CommandText = "SELECT count(distinct id), id FROM Lead WHERE name = " + $"'{model.Name.Trim().ToUpper()}'";
                 _context.Database.OpenConnection();
                 try
                 {
@@ -90,29 +90,38 @@ namespace ProMat.WebAPI.Repository
         }
         public List<Lead> LeadList()
         {
-            using (var command = _context.Database.GetDbConnection().CreateCommand())
-            {
-                List<List<string>> leads = new List<List<string>>();
-                Lead lead = new Lead();
-                var sqlScript = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"Repository\Scripts\leadList.sql");
-                _context.Database.OpenConnection();
-                try
-                {
-                    command.CommandText = sqlScript;
-                    using (DbDataReader dataReader = command.ExecuteReader())
-                    {
-                        while(dataReader.Read())
-                        {
-                            lead.Add(dataReader.GetString(0));
-                            dataReader.Close();
-                        }
-                    }
-                }
-                finally
-                {
-                    _context.Database.CloseConnection();
-                }
-            }
+
+            var result = _context.Lead.Where(x => x.LeadStatusId != 3).ToList();
+            return result;
+
+            //using (var command = _context.Database.GetDbConnection().CreateCommand())
+            //{
+            //    List<Lead> leads = new List<Lead>();
+            //    Lead lead = new Lead();
+            //    var sqlScript = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"Repository\Scripts\leadList.sql");
+            //    _context.Database.OpenConnection();
+            //    try
+            //    {
+            //        command.CommandText = sqlScript;
+            //        using (DbDataReader dataReader = command.ExecuteReader())
+            //        {
+            //            while(dataReader.Read())
+            //            {
+            //                lead.LeadStatusId = Convert.ToInt32(dataReader.GetValue(1));
+            //                lead.Name = dataReader.GetString(2);
+            //                lead.Email = dataReader.GetString(3);
+            //                lead.Phone = dataReader.GetString(4);
+            //                lead.Date = dataReader.GetDateTime(5);
+            //                leads.Add(lead);
+            //            }
+            //        }
+            //        return leads;
+            //    }
+            //    finally
+            //    {
+            //        _context.Database.CloseConnection();
+            //    }
+            //}
         }
     }
 }

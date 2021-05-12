@@ -116,10 +116,10 @@ namespace ProMat.WebAPI.Controllers
         {
             LeadServices leadServices = new LeadServices();
             var response = new ResponseDTO();
-            var leads = new List<List<string>>();
+            List<Lead> leads = leadServices.LeadList();
             try
             {
-                response.Data = new { Leads = leads };
+                response.Data = new { leadList = leads };
             }
             catch (Exception ex)
             {
@@ -127,6 +127,20 @@ namespace ProMat.WebAPI.Controllers
             }
 
             return response;
+        }
+        [HttpPost]
+        [Route("ChangeStatusId")]
+        public void ChangeStatusId([FromBody] List<int> ChangeList, int StatusId)
+        {
+            try
+            {
+                int teste = ChangeList.Count();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         [HttpGet]
         [Route("RemoveDisQualifiedLeads")]

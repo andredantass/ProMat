@@ -85,7 +85,36 @@ main, section {
 	box-shadow: 0 0 30px 5px;
 	display: none;
 }
-
+.box-huge {
+	background-color: white;
+	width: 20%;
+	min-width: 350px;
+	padding-top: 15px;
+	height: 150px;
+	border-radius: 15px;
+	box-shadow: 0 0 30px 5px;
+	display: none;
+}
+.box-huge1 {
+	background-color: white;
+	width: 20%;
+	min-width: 350px;
+	padding-top: 15px;
+	height: 200px;
+	border-radius: 15px;
+	box-shadow: 0 0 30px 5px;
+	display: none;
+}
+.box-huge2 {
+	background-color: white;
+	width: 20%;
+	min-width: 350px;
+	padding-top: 15px;
+	height: 230px;
+	border-radius: 15px;
+	box-shadow: 0 0 30px 5px;
+	display: none;
+}
 .info-space {
 	height: 150PX;
 	width: 100%;
@@ -111,7 +140,7 @@ main, section {
 	width: 90%;
 	text-align: center;
 	border-bottom: solid 1px #ccc;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 .info .content:nth-child(2) > div {
