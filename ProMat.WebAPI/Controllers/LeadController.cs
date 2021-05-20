@@ -130,11 +130,12 @@ namespace ProMat.WebAPI.Controllers
         }
         [HttpPost]
         [Route("ChangeStatusId")]
-        public void ChangeStatusId([FromBody] List<int> ChangeList, int StatusId)
+        public void ChangeStatusId(List<int> ChangeList, int StatusId)
         {
             try
             {
-                int teste = ChangeList.Count();
+                var lista = ChangeList;
+                int status = StatusId;
             }
             catch (Exception)
             {

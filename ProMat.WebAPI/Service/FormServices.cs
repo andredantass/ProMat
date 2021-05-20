@@ -144,7 +144,8 @@ namespace ProMat.WebAPI.Service
                 Name = form.Name.Trim().ToUpper(),
                 Email = form.Email,
                 Phone = form.Phone,
-                Date = DateTime.Now.AddHours(4)
+                Date = DateTime.Now.AddHours(4),
+                Source = form.Source
             };
             //Se 0, o lead ainda não existe na base
             if (leadServices.VerifyLead(lead) == 0)

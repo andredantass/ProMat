@@ -25,7 +25,7 @@
             <div class="content">
               <div>
                 <button (click)="answerChildWasBorn()">Sim</button>
-                <button (click)="countAccessNo()" [routerLink]="'/qualificationnoborn'">Não</button>
+                <button (click)="countAccessNo()" [routerLink]="['/qualificationnoborn', qualifiedForm.Source]">Não</button>
               </div>
             </div>
           </div>

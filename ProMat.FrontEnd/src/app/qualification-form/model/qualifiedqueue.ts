@@ -4,6 +4,7 @@ export class QualifiedQueue
     Name: string;
     Email: string;
     Phone: string;
+    Source: string;
     Situation: string;
     DateBorn: string;
     DateWillBorn: string;

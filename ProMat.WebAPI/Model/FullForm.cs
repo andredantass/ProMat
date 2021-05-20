@@ -8,6 +8,7 @@ namespace ProMat.WebAPI.Model
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Source { get; set; }
         public string Situation { get; set; }
         public string DateBorn { get; set; }
         public string DateWillBorn { get; set; }

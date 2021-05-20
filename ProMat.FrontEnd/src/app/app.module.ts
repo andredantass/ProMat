@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsComponent } from './forms/forms.component';
+import { InstagramFormsComponent } from './forms/instagramForms.component';
+import { FacebookFormsComponent } from './forms/facebookForms.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QualificationFormComponent } from './qualification-form/qualification-form.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
@@ -21,6 +23,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
   declarations: [
     AppComponent,
     FormsComponent,
+    InstagramFormsComponent,
+    FacebookFormsComponent,
     DashboardComponent,
     QualificationFormComponent,
     QuestionFormComponent,

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, AfterViewChecked, AfterViewInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormService } from '../services/form.service';
 import { QualifiedQueue } from '../qualification-form/model/qualifiedqueue';
 import Swal from 'sweetalert2';
@@ -42,6 +42,7 @@ export class FormsComponent implements OnInit, AfterViewChecked, AfterViewInit {
   ngOnInit() {
     startInitial();
     this.getIP();
+    this.qualifiedForm.Source = "Google";
     this.qualifiedForm.DateBorn = "";
     this.qualifiedForm.DateJobEnd = "";
     this.qualifiedForm.DateWillBorn = "";
@@ -189,19 +190,32 @@ export class FormsComponent implements OnInit, AfterViewChecked, AfterViewInit {
   sendToComercial() {
     Swal.fire({
       title: "Quase lá...",
-      html: '<span style="font-size: 24px">Insira seu <strong>nome completo</strong> e clique no botão abaixo para entrar em contato com nossa equipe pelo WhatsApp! <img src="../../assets/img/whatsapp-logo-5.png"><span>',
-      input: 'text',
-      inputPlaceholder: 'Nome Completo',
+      html: '<span style="font-size: 24px">Insira seu <strong>nome completo</strong> e clique no botão abaixo para entrar em contato com nossa equipe pelo WhatsApp! <img src="../../assets/img/whatsapp-logo-5.png"><span>'
+        + '<input  id="swal-input1" placeholder="Nome Completo" class="swal2-input">' +
+        '<input id="swal-input2" maxlength="11" placeholder="WhatsApp (XX) XXXXX-XXXX" class="swal2-input">',
       confirmButtonText: 'QUERO O BENEFÍCIO!',
       focusConfirm: true,
       showCancelButton: false,
       showLoaderOnConfirm: true,
-      inputValidator: (value) => {
-        if (!value) {
-          return 'Por favor insira seu nome!'
+      preConfirm: () => {
+        let n = $('#swal-input2').val().toString();
+        let m = $('#swal-input1').val().toString();
+        function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
+        if ($('#swal-input1').val() == '' || $('#swal-input2').val() == '') {
+          Swal.showValidationMessage("Os campos são obrigatórios!");
+        }
+        else 
+        if (!isNumber(n)){
+          Swal.showValidationMessage("Somente números no campo WhatsApp!");
+        }
+        else 
+        if (isNumber(m)){
+          Swal.showValidationMessage("Somente letras no campo Nome!");
         }
         else {
-          this.qualifiedForm.Name = value;
+          Swal.resetValidationMessage(); // Reset the validation message.
+          this.qualifiedForm.Name = $('#swal-input1').val().toString();
+          this.qualifiedForm.Phone = $('#swal-input2').val().toString();
           this.text = "Olá%2C%20respondi%20o%20formulário%20e%20gostaria%20de%20saber%20se%20tenho%20direito%20ao%20benefício.%20Esses%20são%20meus%20dados%3A%20" +
             `%20Nome%3A%20${this.qualifiedForm.Name} | ` +
             `%20Situação%3A%20${this.qualifiedForm.Situation} | `
@@ -236,6 +250,7 @@ export class FormsComponent implements OnInit, AfterViewChecked, AfterViewInit {
             }
           });
         }
+
       }
     });
   }

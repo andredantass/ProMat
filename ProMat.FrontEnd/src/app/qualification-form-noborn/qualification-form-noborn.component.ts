@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '../services/form.service';
 import { QualifiedQueue } from '../qualification-form/model/qualifiedqueue';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { compareAsc, format } from 'date-fns';
 import Swal from 'sweetalert2';
 
@@ -37,7 +37,7 @@ export class QualificationFormNobornComponent implements OnInit {
   dateBornError: boolean = false;
   dateJobError: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private formService: FormService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private formService: FormService, private router: Router, private _Activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -52,6 +52,7 @@ export class QualificationFormNobornComponent implements OnInit {
       segJobReceive: [''],
       paidTen: ['']
     });
+    this.qualifiedForm.Source = this._Activatedroute.snapshot.paramMap.get("source");
     this.datemin.setFullYear(this.datemin.getFullYear() - 5);
     this.datemin = format(this.datemin, 'yyyy-MM-dd');
     this.datemaxWill.setMonth(this.datemaxWill.getMonth() + 9);

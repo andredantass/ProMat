@@ -31,6 +31,7 @@
     "express": "^4.17.1",
     "http-server": "^0.12.3",
     "jquery": "^3.5.1",
+    "jquery-mask-plugin": "^1.14.16",
     "moment": "^2.29.1",
     "ngx-mask": "^11.1.5",
     "ngx-toastr": "^13.1.0",

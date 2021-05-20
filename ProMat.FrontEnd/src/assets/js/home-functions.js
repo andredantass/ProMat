@@ -6,7 +6,7 @@ var txh1;
 function startInitial()
 {
 
-	if (urlData === '/') {
+	if (urlData === '/' || urlData === '/instagram' || urlData === '/facebook') {
 		var h1	= document.querySelector('.copy h1'),
 		h2		= document.querySelector('.copy h2'),
 		txh1	= 'Você pode ganhar até  R$ 5.556,00.';
