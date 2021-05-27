@@ -13,8 +13,8 @@ export class FormService {
   return;
 constructor(private http: HttpClient) {
 }
-accessCount(path: string, ip: string){
-  return this.http.get(`${this.api}/Form/AccessCount/${path}/${ip}/${"undefined"}`);
+accessCount(path: string, ip: string, source: string){
+  return this.http.get(`${this.api}/Form/AccessCount/${path}/${ip}/${source}`);
 }
 validateBornForm(registerForm: QualifiedQueue) {
   return this.http.post<QualifiedQueue>(`${this.api}/Form/ValidateFormBorn`, registerForm);

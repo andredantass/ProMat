@@ -260,10 +260,10 @@ export class FormsComponent implements OnInit, AfterViewChecked, AfterViewInit {
     }
   }
   countAccessYes() {
-    this.formService.accessCount("Sim", this.ipAddress).subscribe();
+    this.formService.accessCount("Sim", this.ipAddress, this.qualifiedForm.Source).subscribe();
   }
   countAccessNo() {
-    this.formService.accessCount("Não", this.ipAddress).subscribe();
+    this.formService.accessCount("Não", this.ipAddress, this.qualifiedForm.Source).subscribe();
   }
 
 }
